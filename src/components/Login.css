@@ -1,0 +1,45 @@
+.loginMaintCont {
+    background-color:rgb(255, 255, 255);  
+    position:relative;
+    margin:10% auto 40% auto;
+    width:25%;
+    height:65%;
+    border-radius:6px;
+    padding:30px 0 50px 5px;
+    box-shadow:1px 1px 10px gray;
+  }
+
+.loginTitle {
+    position:relative;
+    width:fit-content;
+    margin:30px 0 0 0;    
+}
+
+.loginLabel {
+    margin:30px 3px 0 0px;
+    padding:8px 0 0 0;
+    width:fit-content;   
+}
+
+.loginInput {
+    margin:10px 0 0 0;
+    border-radius:5px;
+    min-width:98.5%;
+    max-width:98.5%;
+    min-height:50px;
+    max-height:50px;
+    border:1px solid rgb(179, 179, 179); 
+    overflow-y:hidden;
+}
+
+.saveProcButton {
+    border-radius:5px;
+    border:1px solid rgb(96, 1, 156);
+    padding:5px 65px 5px 65px;  
+    font-size:1.1vw;
+    font-weight:900;
+    position:relative;
+    color:rgb(96, 1, 156);
+    margin: 20px 0 0 1px;
+    background-color:rgb(255, 255, 255);
+}

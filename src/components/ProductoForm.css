@@ -1,0 +1,65 @@
+.productoFormInnerCont {
+  width:70%;  
+  height:100%;
+  background-color: rgb(194, 194, 197);
+  border:1px solid rgb(186, 186, 186);
+  margin:0 auto 0 auto;
+  overflow:auto;
+  padding:30px 10px 100px 10px;
+  position:relative;
+}
+
+.productoFormTitle {
+  font-weight:900;  
+  margin:0 0 50px 0;
+}
+
+.sameLineLabel {
+  display:inline-block;
+  width:fit-content;
+  position:relative;
+  margin:0 0 0 0;
+  box-sizing: border-box;
+  padding:20px 0 0 0;
+}
+
+.sameLineInput {
+  display:inline-block;
+  margin:0 0 0 15px;
+  border-radius:5px;
+  min-width:20.2%;
+  max-width:20.2%;
+  min-height:25px;
+  max-height:25px;
+  margin-bottom:6px;
+  padding:17px 0 15px 3px;
+  vertical-align:bottom;
+  position:relative;
+  border: 1px solid rgb(107, 105, 105);  
+  overflow-y:hidden;
+  font-size: 1.1vw;
+}
+
+.fullWidthInput {
+  display:block;
+  position:relative;
+  border-radius:5px; 
+  margin: 0 0 0 0;
+  min-width:100%;
+  max-width:100%;
+  min-height:250px;
+  max-height:250px; 
+}
+
+.actionsButton {
+  border-radius:5px;
+  border:1px solid rgb(96, 1, 156);
+  padding:5px 45px 5px 45px;  
+  font-size:1.1vw;
+  font-weight:900;
+  top:20px;
+  left:70%;
+  position:fixed;
+  color:rgb(96, 1, 156);
+  background-color:rgb(255, 255, 255);
+}

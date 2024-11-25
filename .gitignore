@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+FRONTEND/node_modules/
+FRONTEND/public/
 /node_modules
 /.pnp
 .pnp.js
