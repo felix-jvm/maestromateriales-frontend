@@ -96,22 +96,22 @@ export default function ProductoForm(props) {
     <br/>
     <br/>
     <h3 className='sameLineLabel'>Descripción:</h3>
-      <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} />
+      <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} style={{'minWidth':'86%'}}/>
     <br/>  
     <br/>
     <br/>
     <h3 className='sameLineLabel'>Estado Material:</h3>
-      <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0','minHeight':'35px','maxHeight':'35px'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
+      <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'35%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
     <br/>
     <br/>
     <h3 className='sameLineLabel'>Categoria:</h3>
-      <select name='Categoria' className='sameLineInput Categoria'  style={{'padding':'0','minHeight':'35px','maxHeight':'35px'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
+      <select name='Categoria' className='sameLineInput Categoria'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <br/>
     <br/>  
     <h3 className='sameLineLabel'>Unidad Medida:</h3>
-      <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0','minHeight':'35px','maxHeight':'35px'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
+      <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'35%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <br/>  
     <br/>
@@ -131,7 +131,7 @@ export default function ProductoForm(props) {
     <br/>
     <br/>  
     <h3 className='sameLineLabel'>Proveedor:</h3>
-      <select name='Proveedor' className='sameLineInput Proveedor' style={{'padding':'0','minHeight':'35px','maxHeight':'35px'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
+      <select name='Proveedor' className='sameLineInput Proveedor' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <br/>
     <br/>  

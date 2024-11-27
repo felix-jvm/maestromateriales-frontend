@@ -36,15 +36,15 @@ export default function CategoriaForm (props) {
   <div className='formMainCont'>
    <div className='formInnerCont'>
      <form className='editForm'>
+      <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();handleSend(e)}}>Guardar datos</button>
+      <br/>
+      <br/>
+      <br/>
+      <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();props.setEditForm(false)}} style={{'display':'block'}}>Cerrar</button>
       <h1>Crear o modificar Categoria</h1>
+      <br/>
       <h3 className='loginLabel'>Descripción:</h3> 
       <input type='text' className='loginInput descripcion' name='descripcion' required={true}></input>
-      <br/>
-      <br/>
-      <br/>
-      <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();handleSend(e)}}>Aceptar</button>
-      <br/>
-      <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();props.setEditForm(false)}}>Cerrar</button>
      </form>
    </div>
   </div>     

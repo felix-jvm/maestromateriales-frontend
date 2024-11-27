@@ -19,9 +19,7 @@ export default function RecordsTable(props) {
     let divTable = document.getElementsByClassName('divTable')[0]
     let table = document.createElement('table')
     divTable.innerHTML = ''
-    table.className = 'display'
     table.id = 'table'
-    table.style.width = '100%'
     divTable.appendChild(table)
   
     fetch(`http://${window.location.hostname}:8001${props.sectionFormRoute}/`)
@@ -30,11 +28,8 @@ export default function RecordsTable(props) {
       var table = new DataTable('#table', {
         columns: [...re['columns']], 
         data:re['records'],
-        responsive: true,
+        responsive: 'true',
         select: 'single',
-        language: {
-          url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json',
-      },
       })
       table.on('click', 'tr', function () {
        let rowData = table.row(this).data()
@@ -63,8 +58,9 @@ export default function RecordsTable(props) {
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{}}>Modificar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
-   {props.userData.PermisoNivel == 2 && <button className = 'recordButton' onClick = {()=>{props.setUserCreation(true)}} style={{'float':'right','display':'inline-block'}}>Crear nuevo usuario</button>}   
-   <div className='divTable'><table id="table" className="display" width="100%"></table></div>
+   {props.userData.PermisoNivel == 2 && <button className = 'recordButton' onClick = {()=>{props.setUserCreation(true)}} style={{'float':'left'}}>Crear nuevo usuario</button>}   
+   <br/>
+   <div className='divTable'><table id="table"></table></div>
    {editForm && props.sectionFormRoute == '/proveedor' && <ProveedorForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/categoria' && <CategoriaForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/unidadmedida' && <UnidadMedidaForm setEditForm={setEditForm} editForm={editForm}/>}

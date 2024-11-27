@@ -1,15 +1,16 @@
 .RecordsTableMainCont {
-  width:85vw;  
+  width:86.8%;  
   display:inline-block;
   height:89vh;
   position:absolute;
   overflow:auto;
-  margin:0 10% 0 269px;
-  padding:0 1px 0 0;
+  margin:0 0 0 269px;
   background-color: rgba(206, 205, 205, 0.184);
+  background-color: rgba(255, 0, 0, 0.081);
 }
 .divTable {
-  width:99.9%;
+  width:max-content;
+  min-width:100%;
   overflow:auto;
 }
 /* .dataTableTitle {
