@@ -35,6 +35,7 @@ export default function ProductoForm(props) {
         setUpdt(true) 
         for(let elementName of Object.keys(re.specificRecord[0])){
          let element = document.getElementsByClassName(`${elementName}`)[0]
+         if (elementName == 'Codigo') {element.focus()}
          if(element){element.value = re.specificRecord[0][elementName]} }
        
         if(re.specificRecord[0].FichaTecnica == 'True') {
@@ -87,7 +88,7 @@ export default function ProductoForm(props) {
  return (
   <div className='productoFormInnerCont'>
    <form className='productoForm'>
-    <h1 className='productoFormTitle'>Creación o modificación de producto</h1>
+    <h1 className='productoFormTitle'>Crear o modificar Producto</h1>
       
     <h3 className='sameLineLabel'>Código:</h3>
       <input type='text' name='Codigo' className='sameLineInput Codigo' required={true} onBlur={e=>{handleUpdtProp(e,'element')}}/>

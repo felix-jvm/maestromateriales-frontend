@@ -13,46 +13,61 @@ export default function RecordsTable(props) {
  var lastSelectedRecord = useRef(false)
  const [editForm,setEditForm] = useState(false)
 
- setTimeout((()=>{
-  let divTable = document.getElementsByClassName('divTable')[0]
-  let table = document.createElement('table')
-  divTable.innerHTML = ''
-  table.className = 'display'
-  table.id = 'table'
-  table.style.width = '100%'
-  divTable.appendChild(table)
+ function refreshDataTable () {
 
-  fetch(`http://${window.location.hostname}:8001${props.sectionFormRoute}/`)
-  .then(re=>re.json())
-  .then(re=>{
-    var table = new DataTable('#table', {
-      columns: [...re['columns']], 
-      data:re['records'],
-      responsive: true,
-      select: 'single',
-    })
-    table.on('click', 'tr', function () {
-     let rowData = table.row(this).data()
-     
-     if(rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
-     else if(rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
+  setTimeout((()=>{
+    let divTable = document.getElementsByClassName('divTable')[0]
+    let table = document.createElement('table')
+    divTable.innerHTML = ''
+    table.className = 'display'
+    table.id = 'table'
+    table.style.width = '100%'
+    divTable.appendChild(table)
+  
+    fetch(`http://${window.location.hostname}:8001${props.sectionFormRoute}/`)
+    .then(re=>re.json())
+    .then(re=>{
+      var table = new DataTable('#table', {
+        columns: [...re['columns']], 
+        data:re['records'],
+        responsive: true,
+        select: 'single',
+        language: {
+          url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json',
+      },
+      })
+      table.on('click', 'tr', function () {
+       let rowData = table.row(this).data()
+       if(rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
+       else if(rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
 
-}) }) }),50)
+  }) }) }),50) }
  
  function handleEditFormToDisplay(route) {if(route == '/producto') {props.setProductoForm(true)}else{setEditForm(true)}} 
 
- function handleSearchRecord() {props.setProductoForm(`updt_${lastSelectedRecord.current}`)}
-    
+ function handleSearchRecord(recordCode) {if(props.sectionFormRoute == '/producto') {props.setProductoForm(`updt_${recordCode}`)}else{setEditForm(`updt_${lastSelectedRecord.current}`)}}
+ 
+ function handleRemoveRecord(route,identifier) {
+  fetch(`http://${window.location.hostname}:8001${route}/`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({'mode':'delete','code':identifier})
+  })
+  .then(re=>re.json())
+  .then(re=>{if(re['msg'] == 'ok') {refreshDataTable()}}) }
+
+  refreshDataTable()
+
  return (
   <div className='RecordsTableMainCont'>
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{}}>Modificar</button>
-   <button className = 'recordButton' onClick = {()=>{}}>Eliminar</button> 
+   <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
    {props.userData.PermisoNivel == 2 && <button className = 'recordButton' onClick = {()=>{props.setUserCreation(true)}} style={{'float':'right','display':'inline-block'}}>Crear nuevo usuario</button>}   
    <div className='divTable'><table id="table" className="display" width="100%"></table></div>
-   {editForm && props.sectionFormRoute == '/proveedor' && <ProveedorForm setEditForm={setEditForm}/>}
-   {editForm && props.sectionFormRoute == '/categoria' && <CategoriaForm setEditForm={setEditForm}/>}
-   {editForm && props.sectionFormRoute == '/unidadmedida' && <UnidadMedidaForm setEditForm={setEditForm}/>}
-   {editForm && props.sectionFormRoute == '/estadomaterial' && <EstadoMaterialForm setEditForm={setEditForm}/>}
+   {editForm && props.sectionFormRoute == '/proveedor' && <ProveedorForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/categoria' && <CategoriaForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/unidadmedida' && <UnidadMedidaForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/estadomaterial' && <EstadoMaterialForm setEditForm={setEditForm} editForm={editForm}/>}
   </div>  
  )}

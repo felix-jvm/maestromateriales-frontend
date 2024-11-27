@@ -5,7 +5,8 @@
   height:99.9vh;
   padding:0;
   background-color: rgb(242, 242, 242);
-  overflow:hidden;
+  overflow-y:hidden;
+  overflow-x:auto;
 }
 
 .productoFormOuterCont {

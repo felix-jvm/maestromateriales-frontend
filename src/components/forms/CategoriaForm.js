@@ -1,15 +1,32 @@
-import {useState,useRef} from 'react';
+import {useState,useRef,useEffect} from 'react';
 import './formStyles.css';
 
-export default function EstadoMaterialForm (props) {
- 
+export default function CategoriaForm (props) {
+  
+ var forMode = typeof(props.editForm) == 'string' && props.editForm.includes('updt')? 'update':'create'
+ useEffect(()=>{
+  if(forMode == 'update') {
+   setTimeout(()=>{
+    fetch(`http://${window.location.hostname}:8001/categoria/`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'fillForm',code:props.editForm})
+    })
+    .then(re=>re.json())
+    .then((re)=>{
+     let descripcion = document.getElementsByClassName('descripcion')[0] 
+     descripcion.value = re[0].Descripcion
+     descripcion.focus()
+    })},100) } },[]) 
+
  function handleSend(e) {
   let descripcion = document.getElementsByClassName('editForm')[0].descripcion.value.replace(' ','').trim()
   if(descripcion.length) { 
-  fetch(`http://${window.location.hostname}:8001/categoria/`,{
+   var recordCode = forMode == 'update'? props.editForm:''
+   fetch(`http://${window.location.hostname}:8001/categoria/`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({mode:'create',payload:descripcion})
+    body:JSON.stringify({mode:forMode,payload:descripcion,recordCode})
   })
   .then(re=>re.json())
   .then((re)=>{if(re['msg'] == 'ok'){props.setEditForm(false)}})
@@ -19,7 +36,7 @@ export default function EstadoMaterialForm (props) {
   <div className='formMainCont'>
    <div className='formInnerCont'>
      <form className='editForm'>
-      <h2>Proveedor</h2>
+      <h1>Crear o modificar Categoria</h1>
       <h3 className='loginLabel'>Descripción:</h3> 
       <input type='text' className='loginInput descripcion' name='descripcion' required={true}></input>
       <br/>
