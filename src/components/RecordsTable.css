@@ -1,56 +1,42 @@
 .RecordsTableMainCont {
-  width:86.8%;  
   display:inline-block;
-  height:89vh;
-  position:absolute;
+  height:100vh;
+  width:100%;
+  min-width:100%;
+  max-width:100%;
   overflow:auto;
   margin:0 0 0 269px;
-  background-color: rgba(206, 205, 205, 0.184);
 }
 .divTable {
-  width:max-content;
-  min-width:100%;
+  max-width:85%; 
+  min-width:85%;
+  width:85%;
   overflow:auto;
 }
-/* .dataTableTitle {
-  display:inline-block;  
-  position:relative;
-  margin:20px 0 0 0;   
-  font-weight:900;
-} */
-
-/* .table {
-  width:max-content;   
-  margin:0 0 0 0;
-}
-
-.tHead, .tbody {
-  display:block;
-  width:100%;
+#table {
   overflow:auto;
-  border-radius:6px 6px 0 0;
 }
-
-.tBody {
-  background-color: rgb(232, 231, 231);  
-}
-
-*/
-
 .recordButton {
     border-radius:5px;
     border:1px solid rgb(96, 1, 156);
-    font-size:1.1vw;
+    font-size:1vw;
     font-weight:900;
     color:rgb(96, 1, 156);
     display:inline-block;  
-    margin: 100px 3px 5px 3px;
+    margin:100px 3px 5px 0;
     padding:10px 45px 10px 45px;  
     background-color:rgb(255, 255, 255);
 }
 
 .recordButton:hover {
     background-color: rgba(91, 0, 148, 0.122);
+}
+
+@media screen and (max-width:767px) {
+ .recordButton {
+  margin:10px 0 0 0;
+  display:block;
+ }
 }
 
 :root {

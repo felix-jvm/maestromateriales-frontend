@@ -58,9 +58,8 @@ export default function RecordsTable(props) {
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{}}>Modificar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
-   {props.userData.PermisoNivel == 2 && <button className = 'recordButton' onClick = {()=>{props.setUserCreation(true)}} style={{'float':'left'}}>Crear nuevo usuario</button>}   
    <br/>
-   <div className='divTable'><table id="table"></table></div>
+   <div className="divTable"><table id="table" width="100%"></table></div>
    {editForm && props.sectionFormRoute == '/proveedor' && <ProveedorForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/categoria' && <CategoriaForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/unidadmedida' && <UnidadMedidaForm setEditForm={setEditForm} editForm={editForm}/>}

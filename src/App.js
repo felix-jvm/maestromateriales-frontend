@@ -11,8 +11,7 @@ function App() {
   return (
    <div className="App">
     {(!home && !userData && <Login setHome={setHome} setUserData={setUserData} mode={'login'}/>) || 
-    (home && userData && <DataCont setUserCreation={setUserCreation} userData={userData} setUserData={setUserData}/>)
-    }
+    (home && userData && <DataCont setUserCreation={setUserCreation} userData={userData} setUserData={setUserData}/>)}
     {userCreation && <div className='outerLoginCont'><Login setUserCreation={setUserCreation} mode={'userCreation'}/></div>}
    </div>
   );

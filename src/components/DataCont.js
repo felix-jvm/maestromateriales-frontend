@@ -14,6 +14,6 @@ export default function DataCont(props) {
     <Navbar userData={props.userData} setUserData={props.setUserData}/>
     <SideMenu userData={props.userData} setSectionFormRoute={setSectionFormRoute}/>
     {sectionFormRoute && <RecordsTable setProductoForm={setProductoForm} setUserCreation={props.setUserCreation} userData={props.userData} sectionFormRoute={sectionFormRoute}/>}
-    {productoForm && <div className='productoFormOuterCont'><ProductoForm setProductoForm={setProductoForm} productoForm={productoForm}/></div>}
+    {productoForm && <ProductoForm setProductoForm={setProductoForm} productoForm={productoForm}/>}
   </div>  
  ) }

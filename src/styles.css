@@ -3954,7 +3954,7 @@ textarea.form-control-lg {
     position: static;
     z-index: auto;
     flex-grow: 1;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     visibility: visible !important;
     background-color: transparent !important;
@@ -4001,7 +4001,7 @@ textarea.form-control-lg {
     position: static;
     z-index: auto;
     flex-grow: 1;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     visibility: visible !important;
     background-color: transparent !important;
@@ -4048,7 +4048,7 @@ textarea.form-control-lg {
     position: static;
     z-index: auto;
     flex-grow: 1;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     visibility: visible !important;
     background-color: transparent !important;
@@ -4095,7 +4095,7 @@ textarea.form-control-lg {
     position: static;
     z-index: auto;
     flex-grow: 1;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     visibility: visible !important;
     background-color: transparent !important;
@@ -4141,7 +4141,7 @@ textarea.form-control-lg {
   position: static;
   z-index: auto;
   flex-grow: 1;
-  width: auto !important;
+  width: 100% !important;
   height: auto !important;
   visibility: visible !important;
   background-color: transparent !important;
@@ -10983,7 +10983,7 @@ body {
   z-index: 1039;
 }
 .sb-topnav .navbar-brand {
-  width: 225px;
+  width: 100%;
   margin: 0;
 }
 .sb-topnav.navbar-dark #sidebarToggle {
