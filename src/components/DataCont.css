@@ -2,6 +2,8 @@
   padding:0;
   margin:0;
   height:91.9vh;
+  overflow-x:auto;
+  overflow-y:hidden;
 } 
 
 .productoFormOuterCont {

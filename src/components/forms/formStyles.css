@@ -26,13 +26,20 @@
 }
 
 .editFormActionsButton {
-    border-radius:5px;
-    border:1px solid rgb(96, 1, 156);
-    padding:7px 3% 7px 3%;  
-    margin-right: 20px;
-    font-size:1.1vw;
-    font-weight:900;
-    float: right;
-    color:rgb(96, 1, 156);
-    background-color:rgb(255, 255, 255);
+  border-radius:5px;
+  border:1px solid rgb(96, 1, 156);
+  padding:5px 45px 5px 45px;  
+  font-size:0.9vw;
+  font-weight:900;
+  position:sticky;
+  float:right;
+  top:0;
+  margin: 0 2px 0 0;
+  z-index:3000;
+  color:rgb(96, 1, 156);
+  background-color:rgb(255, 255, 255);
+}
+
+.formsTitle {
+  font-weight:900;  
 }

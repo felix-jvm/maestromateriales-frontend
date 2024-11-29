@@ -4,17 +4,20 @@
   width:100%;
   min-width:100%;
   max-width:100%;
-  overflow:auto;
-  margin:0 0 0 269px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  margin:0 0 0 42px;
 }
 .divTable {
-  max-width:85%; 
-  min-width:85%;
-  width:85%;
-  overflow:auto;
+  max-width:max-content; 
+  min-width:fit-content;
+  width:max-content;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 #table {
-  overflow:auto;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 .recordButton {
     border-radius:5px;
@@ -38,8 +41,16 @@
   position:relative;
   top:50px;
   display:block;
+  margin-left:47%;
+  margin-bottom: 20px;
  }
 }
+
+@media screen and (min-width:992px) {
+  .RecordsTableMainCont {
+   margin-left:269px;
+  }
+ }
 
 :root {
   --dt-row-selected: 13, 110, 253;
