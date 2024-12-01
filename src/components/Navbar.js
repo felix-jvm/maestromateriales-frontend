@@ -1,14 +1,15 @@
 import {useState} from 'react';
-import './Navbar.css';
+// import './Navbar.css';
+import '../styles.css'
 
 export default function Navbar(props) {
 
  return (
-  <div className='navbarMainCont'>
+  <>
     {/* <h5 className='nameLabel'>Usuario: <b>{props.userData.Nombre}</b></h5>
     <h5 className='closeSession' onClick={()=>{props.setUserData(false)}} onMouseEnter={(e)=>{e.target.style.cursor='pointer'}}>Cerrar sesión</h5> */}
 
-<nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark" style={{'backgroundColor':'#343a40','padding':'0 0 0 1%'}}>
             
             <a className="navbar-brand ps-3" href="index.html">MAESTRO DE MATERIALES</a>
             
@@ -30,5 +31,5 @@ export default function Navbar(props) {
                 </li>
             </ul>
         </nav>    
-  </div>  
+  </>  
  )}

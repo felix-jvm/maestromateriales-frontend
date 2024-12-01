@@ -1,24 +1,22 @@
 .RecordsTableMainCont {
   display:inline-block;
-  height:100vh;
-  width:100%;
+  position:relative;
+  height:100%;
+  max-width:100%; 
   min-width:100%;
-  max-width:100%;
+  width:100%;
   overflow-x:auto;
-  overflow-y:hidden;
-  margin:0 0 0 42px;
+  margin:0 0 0 41px;
 }
 .divTable {
-  max-width:max-content; 
-  min-width:fit-content;
-  width:max-content;
+  position:relative;
+  max-width:100%; 
+  min-width:100%;
+  width:100%;
   overflow-x:auto;
   overflow-y:hidden;
 }
-#table {
-  overflow-x:auto;
-  overflow-y:hidden;
-}
+
 .recordButton {
     border-radius:5px;
     border:1px solid rgb(96, 1, 156);
@@ -37,22 +35,29 @@
 
 @media screen and (max-width:767px) {
  .recordButton {
-  margin:10px 0 0 0;
+  margin:5px auto 20px auto;
   position:relative;
   top:50px;
   display:block;
-  margin-left:47%;
-  margin-bottom: 20px;
  }
 }
 
 @media screen and (min-width:992px) {
   .RecordsTableMainCont {
-   margin-left:269px;
+   margin-left:266px;
   }
  }
 
-:root {
+ @media screen and (max-width:1550px) {
+  td,th{
+   max-width:10.9px; 
+   min-width:10.9px; 
+   width:10.9px;
+   overflow:auto;
+  }
+ }
+
+/* :root {
   --dt-row-selected: 13, 110, 253;
   --dt-row-selected-text: 255, 255, 255;
   --dt-row-selected-link: 9, 10, 11;
@@ -63,7 +68,7 @@
 }
 :root.dark {
   --dt-html-background: rgb(33, 37, 41);
-}
+} */
 
 table.dataTable td.dt-control {
   text-align: center;
@@ -97,7 +102,7 @@ html.dark table.dataTable tr.dt-hasChild td.dt-control:before,
   border-left-color: transparent;
 }
 
-div.dt-scroll {
+/* div.dt-scroll {
   width: 100%;
 }
 
@@ -119,7 +124,7 @@ div.dt-scroll-body tfoot tr th div.dt-scroll-sizing,
 div.dt-scroll-body tfoot tr td div.dt-scroll-sizing {
   height: 0 !important;
   overflow: hidden !important;
-}
+} */
 
 table.dataTable thead > tr > th:active,
 table.dataTable thead > tr > td:active {
@@ -217,7 +222,7 @@ div.dt-scroll-body > table.dataTable > thead > tr > td {
   outline: 2px solid rgba(255, 255, 255, 0.05);
 }
 
-div.dt-processing {
+/* div.dt-processing {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -284,7 +289,7 @@ div.dt-processing > div:last-child > div:nth-child(4) {
   100% {
     transform: translate(24px, 0);
   }
-}
+} */
 table.dataTable.nowrap th, table.dataTable.nowrap td {
   white-space: nowrap;
 }
@@ -567,7 +572,7 @@ table.dataTable.compact tbody td {
   padding: 4px;
 }
 
-div.dt-container div.dt-layout-row {
+/* div.dt-container div.dt-layout-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -589,7 +594,7 @@ div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
 }
 div.dt-container div.dt-layout-row div.dt-layout-cell:empty {
   display: none;
-}
+} */
 
 @media screen and (max-width: 767px) {
   div.dt-container div.dt-layout-row:not(.dt-layout-table) {
@@ -609,7 +614,7 @@ div.dt-container div.dt-layout-row div.dt-layout-cell:empty {
     margin-left: 0;
   }
 }
-div.dt-container div.dt-layout-start > *:not(:last-child) {
+/* div.dt-container div.dt-layout-start > *:not(:last-child) {
   margin-right: 1em;
 }
 div.dt-container div.dt-layout-end > *:not(:first-child) {
@@ -633,7 +638,7 @@ div.dt-container div.dt-layout-table > div {
   div.dt-container div.dt-layout-end > *:not(:first-child) {
     margin-left: 0;
   }
-}
+} */
 /* 
  * Control feature layout */
 
@@ -722,6 +727,7 @@ div.dt-container .dt-info,
 div.dt-container .dt-processing,
 div.dt-container .dt-paging {
   color: inherit;
+  margin-top:10px;
 }
 div.dt-container .dataTables_scroll {
   clear: both;
@@ -789,7 +795,7 @@ html.dark table.dataTable.cell-border > tbody > tr > td:first-child {
 html.dark .dt-container.dt-empty-footer table.dataTable {
   border-bottom: 1px solid rgb(89, 91, 94);
 }
-html.dark .dt-container .dt-search input,
+/* html.dark .dt-container .dt-search input,
 html.dark .dt-container .dt-length select {
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: var(--dt-html-background);
@@ -807,7 +813,7 @@ html.dark .dt-container .dt-paging .dt-paging-button:hover {
 }
 html.dark .dt-container .dt-paging .dt-paging-button:active {
   background: #3a3a3a;
-}
+} */
 
 *[dir=rtl] table.dataTable thead th,
 *[dir=rtl] table.dataTable thead td,
@@ -820,7 +826,7 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
 *[dir=rtl] table.dataTable td.dt-type-date {
   text-align: left;
 }
-*[dir=rtl] div.dt-container div.dt-layout-cell.dt-start {
+/* *[dir=rtl] div.dt-container div.dt-layout-cell.dt-start {
   text-align: right;
 }
 *[dir=rtl] div.dt-container div.dt-layout-cell.dt-end {
@@ -828,4 +834,13 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
 }
 *[dir=rtl] div.dt-container div.dt-search input {
   margin: 0 3px 0 0;
+} */
+
+#table {
+  display:block;
+  min-width:132%;
+  max-width:132%; 
+  width:132%;
+  font-size:0.8vw;
+  margin:0 0 0 -10px;
 }

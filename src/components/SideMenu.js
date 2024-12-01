@@ -1,4 +1,5 @@
-import '../styles.css'
+// import '../styles.css'
+// import './SideMenu.css'
 
 export default function SideMenu(props) {
 

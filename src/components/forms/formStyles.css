@@ -2,19 +2,19 @@
     width:99.9%;  
     height:99.9%;
     position:absolute;
-    top:1px;
-    left:1px;
+    top:0;
+    left:0;
     z-index:2000;
   }
 
 .formInnerCont {
     background-color:rgb(194, 194, 197);  
     position:relative;
-    margin:10% 0 0 15%;
+    margin:10% 0 0 6%;
     width:65%;
     height:65%;
     border-radius:6px;
-    padding:30px 0 50px 5px;
+    padding:30px 0 50px 0.3%;
     box-shadow:1px 1px 10px gray;
   }
 
@@ -42,4 +42,56 @@
 
 .formsTitle {
   font-weight:900;  
+}
+
+.descripcion {
+ min-width:98%;
+}
+
+@media screen and (max-width:991px){
+  .formInnerCont {
+   margin:10% auto 0 auto;
+  }
+}
+
+@media screen and (max-width:1070px){
+  .formInnerCont {
+   padding:0;
+  }
+  .descripcion {
+    min-width:98%;
+    max-width:98%;
+   }
+}
+
+@media screen and (max-width:750px){
+  .descripcion {
+    min-width:97.5%;
+    max-width:97.5%;
+   }
+}
+
+@media screen and (max-width:600px){
+  .descripcion {
+    min-width:97%;
+    max-width:97%;
+   }
+}
+
+@media screen and (max-width:500px){
+  .descripcion {
+    min-width:96.3%;
+    max-width:96.3%;
+   }
+}
+
+@media screen and (max-width:400px){
+  .descripcion {
+    min-width:95.3%;
+    max-width:95.3%;
+   }
+  .editFormActionsButton {
+    display:block;
+    margin-top:3px;
+  } 
 }

@@ -156,7 +156,7 @@ export default function ProductoForm(props) {
     <br/>
     <br/>        
     <h5 className='sameLineLabel'>FichaTecnica:</h5>
-      <input type="file" accept="image/*" onChange={handleImageUpload} style={{'padding':'0 0 38px 0'}} className='sameLineInput'/> 
+      <input type="file" accept="image/*" onChange={handleImageUpload} style={{'padding':'0'}} className='sameLineInput'/> 
       {image && (
         <img
           src={image}
