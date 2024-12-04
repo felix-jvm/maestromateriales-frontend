@@ -18,7 +18,7 @@ export default function Navbar(props) {
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a className="dropdown-item" href="#!" onClick={()=>{setUserCreation(true)}}>Agregar usuario</a></li>
+                        {props.userData.PermisoNivel > 1 && <li><a className="dropdown-item" href="#!" onClick={()=>{setUserCreation(true)}}>Agregar usuario</a></li>}
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" href="#!" onClick={()=>{props.setUserData(false)}}>Cerrar sesión</a></li>
                     </ul>
