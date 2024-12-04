@@ -838,9 +838,9 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
 
 #table {
   display:block;
-  min-width:132%;
-  max-width:132%; 
-  width:132%;
+  min-width:135%;
+  max-width:135%; 
+  width:135%;
   font-size:0.8vw;
   margin:0 0 0 -10px;
 }

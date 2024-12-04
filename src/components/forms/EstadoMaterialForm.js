@@ -38,7 +38,7 @@ export default function EstadoMaterialForm (props) {
      <form className='editForm'>
       <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();props.setEditForm(false)}} style={{'marginRight':'18px'}}>Cerrar</button>      
       <button className='editFormActionsButton' onClick={(e)=>{e.preventDefault();handleSend(e)}}>Guardar datos</button>
-      <h1 className='formsTitle'>Crear o modificar Estado del Material</h1>
+      <h1 className='formsTitle'>Crear o modificar Estado del material</h1>
       <h5 className='loginLabel'>Descripción:</h5> 
       <input type='text' className='loginInput descripcion' name='descripcion' required={true} style={{'paddingLeft':'8px'}}></input>
      </form>

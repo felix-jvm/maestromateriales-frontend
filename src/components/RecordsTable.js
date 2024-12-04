@@ -33,8 +33,8 @@ export default function RecordsTable(props) {
       })
       table.on('click', 'tr', function () {
        let rowData = table.row(this).data()
-       if(rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
-       else if(rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
+       if(rowData && rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
+       else if(rowData && rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
 
   }) }) }),50) }
  
@@ -55,6 +55,9 @@ export default function RecordsTable(props) {
 
  return (
   <div className='RecordsTableMainCont'>
+   <h1 style={{'margin':'50px 0 0 0'}}>{(props.sectionFormRoute == '/producto' && 'Productos') || (props.sectionFormRoute == '/categoria' && 'Categorias') ||
+    (props.sectionFormRoute == '/unidadmedida' && 'Unidades de medida') || (props.sectionFormRoute == '/estadomaterial' && 'Estados del material') || 
+    (props.sectionFormRoute == '/proveedor' && 'Proveedores')}</h1>
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{}}>Modificar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
