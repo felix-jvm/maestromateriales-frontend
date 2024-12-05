@@ -1,11 +1,15 @@
 import {useState,useEffect,useRef} from 'react';
+import Modal from './Modal';
 import './ProductoForm.css';
 
 export default function ProductoForm(props) {
  const [updt,setUpdt] = useState(false)
- const [image, setImage] = useState(false);
- const [archive, setArchive] = useState(false);
+ const [image, setImage] = useState(false)
+ const [archive, setArchive] = useState(false)
+ const [duplCodeError,setDuplCodeError] = useState(false)
+ var codeInitValue = useRef(false)
  var payload = useRef({})
+ var codeError = useRef(false)
  typeof(props.productoForm) == 'string' && props.productoForm.includes('updt')? payload.current['updt_producto_codigo'] = props.productoForm.split('_')[1].replace(' ','').trim():void 0
 
  useEffect(()=>{
@@ -35,7 +39,7 @@ export default function ProductoForm(props) {
         setUpdt(true) 
         for(let elementName of Object.keys(re.specificRecord[0])){
          let element = document.getElementsByClassName(`${elementName}`)[0]
-         if (elementName == 'Codigo') {element.focus()}
+         if (elementName == 'Codigo') {element.focus();codeInitValue.current = re.specificRecord[0][elementName]}
          if(element){element.value = re.specificRecord[0][elementName]} }
        
         if(re.specificRecord[0].FichaTecnica == 'True') {
@@ -50,16 +54,17 @@ export default function ProductoForm(props) {
  function handleSend(e) {
   e.preventDefault()  
   let productoForm = document.getElementsByClassName('productoForm')[0]
-  // let payload = !updt? {'Codigo':'','Descripcion':'','EstadoMaterial':'','Categoria':'','UnidadMedida':'','Minimo':'','Maximo':'','PuntoReorden':'','Proveedor':'','TiempoEntrega':'','PedidoEstandar':'','LoteMinimo':'','LoteMaximo':'','TiempoProcesoInterno':'','TiempoVidaUtil':''}:payload.current
-  // if(!updt) {for(let inputs of Object.keys(payload)) {payload[inputs] = productoForm[inputs].value?productoForm[inputs].value:undefined}}
+  if(Object.keys(payload.current).includes('updt_producto_codigo') && productoForm.Codigo.value != codeInitValue.current) {payload.current = {...payload.current,'codeChanged':true}}
   payload = payload.current
   fetch(`http://${window.location.hostname}:8001/producto/`,{
     'method':'POST',
     'headers':{'Content-Type':'application/json'},
     body:JSON.stringify({'mode':'create',payload})
   })
+  .then(re=>re.json())
+  .then(re=>{if(re['msg'].length > 5){setDuplCodeError(re['msg']);codeError.current=true}})
   setTimeout(()=>{
-   if (archive) {
+   if (archive && !duplCodeError) {
     let productCode = productoForm['Codigo'].value
     const formData = new FormData()
     formData.append('mode','save_ficha_tecnica')
@@ -68,8 +73,9 @@ export default function ProductoForm(props) {
     fetch(`http://${window.location.hostname}:8001/producto/`,{
        method:'POST',
        body:formData
-     })
-  } props.setProductoForm(false) },200)  }
+    })}if(codeError.current){codeError.current=false}else{props.setProductoForm(false)}},200)
+  }
+
 
  const handleImageUpload = (event) => {
   const file = event.target.files[0];
@@ -168,6 +174,10 @@ export default function ProductoForm(props) {
       )}         
    </form>
   </div>  
+  {duplCodeError && <Modal displayInnerCont={true} reload={false} message={duplCodeError} setModal={setDuplCodeError} mainContColor={'black'} InnerContColor={'white'} 
+    icon={<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+  </svg>}/>}
  </div> 
  )
 }

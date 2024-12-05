@@ -3,7 +3,7 @@
     position:fixed;
     left:0px;
     top:0;
-    z-index:2000;
+    z-index:3000;
     min-width:100%;
     max-width:100%;
     min-height:100%;
@@ -14,7 +14,7 @@
    .modalInnerCont {
      background-color:rgb(229, 229, 229);  
      position:relative;
-     margin:20% auto 40% auto;
+     margin:17% auto 40% auto;
      width:30%;
      height:fit-content;
      border-radius:6px;
@@ -47,4 +47,8 @@
      border:1px solid rgb(96, 1, 156);
      color:rgb(96, 1, 156);
      font-weight:900;
+   }
+
+   .modalConfirmationButton:hover {
+    cursor:pointer;
    }
