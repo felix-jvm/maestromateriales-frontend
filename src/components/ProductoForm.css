@@ -29,22 +29,21 @@
   display:inline-block;
   width:fit-content;
   position:relative;
-  margin:0 0 0 0;
+  margin:0;
   box-sizing: border-box;
-  padding:20px 0 0 0;
+  padding:10px 0 0 0;
 }
 
 .sameLineInput {
   display:inline-block;
-  margin:0 0 0 5px;
   border-radius:5px;
   min-width:20.2%;
   max-width:20.2%;
   min-height:25px;
   max-height:25px;
-  margin-bottom:6px;
+  margin:-5px 0 0 0px;
+  
   padding:3px 0 3px 5px;
-  vertical-align:bottom;
   position:relative;
   border: 1px solid rgb(107, 105, 105);  
   overflow-y:hidden;
@@ -65,7 +64,8 @@
 .actionsButton {
   border-radius:5px;
   border:1px solid rgb(96, 1, 156);
-  padding:5px 45px 5px 45px;  
+  padding:7px 0 8px 0;  
+  width:15%;  
   font-size:0.9vw;
   font-weight:900;
   position:sticky;
@@ -75,6 +75,11 @@
   z-index:3000;
   color:rgb(96, 1, 156);
   background-color:rgb(255, 255, 255);
+}
+
+.actionsButton:hover {
+  background-color: rgba(91, 0, 148, 0.122);
+  cursor: pointer;
 }
 
 @media screen and (max-width:317px){

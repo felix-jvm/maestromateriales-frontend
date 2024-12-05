@@ -96,72 +96,72 @@ export default function ProductoForm(props) {
     <h1 className='productoFormTitle'>Crear o modificar Producto</h1>
       
     <h5 className='sameLineLabel'>Código:</h5>
+    <br/>
       <input type='text' name='Codigo' className='sameLineInput Codigo' required={true} onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>  
     <br/>
     <h5 className='sameLineLabel'>Descripción:</h5>
-      <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} style={{'minWidth':'80%'}}/>
-    <br/>  
+    <br/>
+      <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} style={{'minWidth':'80%'}}/>  
     <br/>
     <h5 className='sameLineLabel'>Estado Material:</h5>
-      <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'35%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
-    <br/>  
+    <br/>
+      <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <h5 className='sameLineLabel'>Categoria:</h5>
+    <br/>    
       <select name='Categoria' className='sameLineInput Categoria'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
-    <br/>
     <h5 className='sameLineLabel'>Unidad Medida:</h5>
-      <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'35%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
-    <br/>
+    <br/>    
+      <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
     <h5 className='sameLineLabel'>Minimo:</h5>
+    <br/>    
       <input type='number' name='Minimo' className='sameLineInput Minimo'  onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/> 
     <h5 className='sameLineLabel'>Maximo:</h5>
+    <br/>    
       <input type='number' name='Maximo' className='sameLineInput Maximo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Punto Reorden:</h5>
+    <br/>    
       <input type='number' name='PuntoReorden' className='sameLineInput PuntoReorden' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Proveedor:</h5>
+    <br/>    
       <select name='Proveedor' className='sameLineInput Proveedor' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Tiempo Entrega:</h5>
+    <br/>    
       <input type='number' name='TiempoEntrega' className='sameLineInput TiempoEntrega' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>
-    <br/>  
     <h5 className='sameLineLabel'>Pedido Estandar:</h5>
+    <br/>    
       <input type='number' name='PedidoEstandar' className='sameLineInput PedidoEstandar' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Lote Minimo:</h5>
+    <br/>    
       <input type='number' name='LoteMinimo' className='sameLineInput LoteMinimo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Lote Maximo:</h5>
+    <br/>    
       <input type='number' name='LoteMaximo' className='sameLineInput LoteMaximo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Tiempo Proceso Interno:</h5>
+    <br/>    
       <input type='number' name='TiempoProcesoInterno' className='sameLineInput TiempoProcesoInterno' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>  
     <h5 className='sameLineLabel'>Tiempo Vida Util:</h5>
+    <br/>    
       <input type='number' name='TiempoVidaUtil' className='sameLineInput TiempoVidaUtil' onBlur={e=>{handleUpdtProp(e,'element')}}/>
-    <br/>
     <br/>        
-    <h5 className='sameLineLabel'>FichaTecnica:</h5>
-      <input type="file" accept="image/*" onChange={handleImageUpload} style={{'padding':'0'}} className='sameLineInput'/> 
+    <h5 className='sameLineLabel' style={{'display':'block','margin': '0 0 0 0','position':'relative'}}>FichaTecnica:</h5> 
+      <input type="file" accept="image/*" onChange={handleImageUpload} className='sameLineInput'/> 
       {image && (
         <img
           src={image}
           alt="Uploaded"
-          style={{ cursor: 'pointer', margin: '10px 0 0 5px', maxWidth: '100px', maxHeight:'100px' }}
+          style={{'display':'block','cursor':'pointer','margin': '1px 0 0 0','maxWidth':'100px','maxHeight':'100px' }}
           className='imageElement'
           onClick={handleImageClick}
         />

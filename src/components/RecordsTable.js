@@ -31,11 +31,14 @@ export default function RecordsTable(props) {
         responsive: 'true',
         select: 'single',
       })
-      table.on('click', 'tr', function () {
+      table.on('dblclick', 'tr', function () {
        let rowData = table.row(this).data()
-       if(rowData && rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
-       else if(rowData && rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
-
+       if(rowData){
+        lastSelectedRecord.current=rowData[0]
+        handleSearchRecord(rowData[0])
+       }
+      //  if(rowData && rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
+      //  else if(rowData && rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
   }) }) }),50) }
  
  function handleEditFormToDisplay(route) {if(route == '/producto') {props.setProductoForm(true)}else{setEditForm(true)}} 

@@ -28,7 +28,8 @@
 .editFormActionsButton {
   border-radius:5px;
   border:1px solid rgb(96, 1, 156);
-  padding:5px 45px 5px 45px;  
+  padding:7px 0 8px 0;  
+  width:15%;
   font-size:0.9vw;
   font-weight:900;
   position:sticky;
@@ -40,12 +41,17 @@
   background-color:rgb(255, 255, 255);
 }
 
+.editFormActionsButton:hover {
+  background-color: rgba(91, 0, 148, 0.122);
+  cursor:pointer;
+}
+
 .formsTitle {
   font-weight:900;  
 }
 
 .descripcion {
- min-width:98%;
+  margin:-2px 0 0 0;
 }
 
 @media screen and (max-width:991px){
