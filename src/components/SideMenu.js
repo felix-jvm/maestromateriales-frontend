@@ -14,27 +14,27 @@ export default function SideMenu(props) {
                         <div className="sidenav-nav nav sideNavInnerCont">
                             <div className="sb-sidenav-menu-heading">Secciones</div>
                             <a className="nav-link" href="index.html" onClick={(e)=>{updateRoute(e,'/producto')}}>
-                                <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Producto
                             </a>                            
                             <a className="nav-link" href="index.html" onClick={(e)=>{updateRoute(e,'/categoria')}}>
-                                <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Categoria
                             </a>
                             <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts" onClick={(e)=>{updateRoute(e,'/unidadmedida')}}>
-                                <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Unidad de medida
-                                <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                <div className="sb-sidenav-collapse-arrow"><i className=""></i></div>
                             </a>
                             <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             </div>
                             <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages" onClick={(e)=>{updateRoute(e,'/estadomaterial')}}>
-                                <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Estado del material
-                                <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                <div className="sb-sidenav-collapse-arrow"><i className=""></i></div>
                             </a>
                             <a className="nav-link" href="charts.html" onClick={(e)=>{updateRoute(e,'/proveedor')}}>
-                                <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Proveedor
                             </a>
                         </div>

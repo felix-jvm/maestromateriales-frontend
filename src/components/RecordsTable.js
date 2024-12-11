@@ -36,10 +36,13 @@ export default function RecordsTable(props) {
        if(rowData){
         lastSelectedRecord.current=rowData[0]
         handleSearchRecord(rowData[0])
-       }
-      //  if(rowData && rowData[0]!==lastSelectedRecord.current){lastSelectedRecord.current=rowData[0]}
-      //  else if(rowData && rowData[0]==lastSelectedRecord.current){handleSearchRecord(rowData[0]);lastSelectedRecord.current=undefined}
-  }) }) }),50) }
+       }}) 
+      table.on('click', 'tr', function () {
+       let rowData = table.row(this).data()
+       if(rowData){
+        lastSelectedRecord.current=rowData[0]
+    }})  
+}) }),50) }
  
  function handleEditFormToDisplay(route) {if(route == '/producto') {props.setProductoForm(true)}else{setEditForm(true)}} 
 
@@ -62,7 +65,6 @@ export default function RecordsTable(props) {
     (props.sectionFormRoute == '/unidadmedida' && 'Unidades de medida') || (props.sectionFormRoute == '/estadomaterial' && 'Estados del material') || 
     (props.sectionFormRoute == '/proveedor' && 'Proveedores')}</h1>
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
-   <button className = 'recordButton' onClick = {()=>{}}>Modificar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
    <br/>
    <div className="divTable"><table id="table"></table></div>
