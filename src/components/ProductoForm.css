@@ -82,6 +82,12 @@
   cursor: pointer;
 }
 
+.inlineFormLabel {
+  font-size:13px;
+  text-decoration:none;
+  margin:0 0 0 0.5%;
+}
+
 @media screen and (max-width:317px){
   .actionsButton {
     display:block;

@@ -1,0 +1,64 @@
+.inlineFormOutterCont {
+    width:100vw;  
+    height:100vh;
+    position:absolute;
+    display:inline-block;
+    z-index:3000;
+    top:1px;
+}
+
+.inlineFormInnerCont {
+    width:65%;  
+    background-color: rgb(237, 235, 235);
+    border:1px solid rgb(186, 186, 186);
+    margin:14% auto 0 auto;
+    overflow:auto;
+    padding:10px 10px 30px 10px;
+    position:relative;
+    box-shadow:1px 1px 8px gray;
+}
+
+.inlineFormLabel {
+    margin:30px 3px 0 0px;
+    padding:8px 0 0 0;
+    width:fit-content;   
+}
+
+.inlineFormInput {
+    margin:0;
+    border-radius:5px;
+    min-width:97%;
+    max-width:97%;
+    min-height:50px;
+    max-height:50px;
+    padding-left:5px;
+    border:1px solid rgb(179, 179, 179); 
+    overflow-y:hidden;
+}
+
+.inlineSaveProcButton {
+    border-radius:5px;
+    border:1px solid rgb(96, 1, 156);
+    padding:7px 0 8px 0;  
+    width:15%;  
+    font-size:0.9vw;
+    font-weight:900;
+    position:sticky;
+    float:right;
+    top:0;
+    margin: 0 0 0 3px;
+    z-index:3000;
+    color:rgb(96, 1, 156);
+    background-color:rgb(255, 255, 255);
+}
+
+.inlineSaveProcButton:hover {
+    background-color: rgba(91, 0, 148, 0.122);
+    cursor: pointer;
+}
+
+.inlineLoginTitle {
+    position:relative;
+    width:fit-content;
+    margin:0 0 40px 0;    
+}

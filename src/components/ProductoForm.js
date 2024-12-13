@@ -1,5 +1,9 @@
 import {useState,useEffect,useRef} from 'react';
 import Modal from './Modal';
+import InlineCategoriaForm from './inlineForms/InlineCategoriaForm';
+import InlineEstadoMaterialForm from './inlineForms/InlineEstadoMaterialForm';
+import InlineProveedorForm from './inlineForms/InlineProveedorForm';
+import InlineUnidadMedidaForm from './inlineForms/InlineUnidadMedidaForm';
 import './ProductoForm.css';
 
 export default function ProductoForm(props) {
@@ -7,6 +11,7 @@ export default function ProductoForm(props) {
  const [image, setImage] = useState(false)
  const [archive, setArchive] = useState(false)
  const [duplCodeError,setDuplCodeError] = useState(false)
+ const [inlineForm,setInlineForm] = useState(false)
  var codeInitValue = useRef(false)
  var payload = useRef({})
  var codeError = useRef(false)
@@ -91,6 +96,8 @@ export default function ProductoForm(props) {
   if (e.target.value.length){payload.current[name] = e.target.value}else{delete payload.current[name]}
  }
 
+ function handleDisplayInlineForm(e,route,element) {e.preventDefault();setInlineForm(`${route},${element}`)}
+
  return (
  <div className='productoFormOuterCont'>
   <div className='productoFormInnerCont'>
@@ -110,14 +117,17 @@ export default function ProductoForm(props) {
       <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} style={{'minWidth':'80%'}}/>  
     <br/>
     <h5 className='sameLineLabel'>Estado Material:</h5>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'estadomaterial','EstadoMaterial')}}>Agregar Estado Material</a>
     <br/>
       <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <h5 className='sameLineLabel'>Categoria:</h5>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'categoria','Categoria')}}>Agregar Categoria</a>
     <br/>    
       <select name='Categoria' className='sameLineInput Categoria'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
     <h5 className='sameLineLabel'>Unidad Medida:</h5>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'unidadmedida','UnidadMedida')}}>Agregar Unidad Medida</a>
     <br/>    
       <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
@@ -134,6 +144,7 @@ export default function ProductoForm(props) {
       <input type='number' name='PuntoReorden' className='sameLineInput PuntoReorden' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
     <h5 className='sameLineLabel'>Proveedor:</h5>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'proveedor','Proveedor')}}>Agregar Proveedor</a>
     <br/>    
       <select name='Proveedor' className='sameLineInput Proveedor' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
@@ -174,6 +185,11 @@ export default function ProductoForm(props) {
       )}         
    </form>
   </div>  
+  {inlineForm && ( (inlineForm.split(',')[0]=='categoria' && <InlineCategoriaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
+  (inlineForm.split(',')[0]=='estadomaterial' && <InlineEstadoMaterialForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
+  (inlineForm.split(',')[0]=='unidadmedida' && <InlineUnidadMedidaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
+  (inlineForm.split(',')[0]=='proveedor' && <InlineProveedorForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) )}
+
   {duplCodeError && <Modal displayInnerCont={true} reload={false} message={duplCodeError} setModal={setDuplCodeError} mainContColor={'black'} InnerContColor={'white'} 
     icon={<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
