@@ -844,8 +844,13 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
   max-width:120%; 
   width:120%;
   font-size:0.8vw;
-  margin:0 0 0 -10px;
+  margin:0;
 }
+
+#table td {
+  border:0.1px solid black;
+
+ }
 
 #table tr:hover {
  background-color: rgb(206, 206, 206);
