@@ -15,6 +15,7 @@ export default function Navbar(props) {
             <a className="navbar-brand ps-3" style={{'margin':'0.7% 0 0 0'}}>MAESTRO DE MATERIALES</a>
             
             <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <h5 className="navbar-brand ps-3" style={{'margin':'0.7% 0 0 0','color':'white'}}>{props.userData.Nombre}</h5>
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{'overflowX':'hidden'}}>

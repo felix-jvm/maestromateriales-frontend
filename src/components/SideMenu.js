@@ -39,10 +39,10 @@ export default function SideMenu(props) {
                             </a>
                         </div>
                     </div>
-                    <div className="sb-sidenav-footer">
+                    {/* <div className="sb-sidenav-footer">
                         <div className="small">Sesión iniciada como:</div>
                         {props.userData.Nombre}
-                    </div>
+                    </div> */}
                 </nav>
             </div>
         </div>
