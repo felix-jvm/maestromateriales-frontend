@@ -104,7 +104,6 @@ export default function ProductoForm(props) {
  const handleImageClick = () => {if (image) {window.open(image, '_blank')}}
 
  function handleUpdtProp(e,nameRoute) {
-  console.log('----------------<...CAALI')
   let name = nameRoute == 'parentElement'? e.target.parentElement.name:e.target.name
   if (e.target.value.length){payload.current[name] = e.target.value}else{delete payload.current[name]}
  }
@@ -136,11 +135,12 @@ export default function ProductoForm(props) {
    } })}
 
  function handleSequenceInt(e) {
+    console.log('----------->',e.target.value)
     let codigo = document.getElementsByClassName('Codigo')[0]
     let familiaSelect = document.getElementsByClassName('Familia')[0]
     let segmentoSelect = document.getElementsByClassName('Segmento')[0]
     let claseSelect = document.getElementsByClassName('Clase')[0]
-    if(e.target.name == 'Familia' && e.target.value) {fillSeqSelects('segmento',e.target.value,segmentoSelect)}
+    if(e.target.name == 'Familia' && e.target.value) {fillSeqSelects('segmento',e.target.value,segmentoSelect);claseSelect.innerText = ''}
     if(e.target.name == 'Segmento' && !familiaSelect.value) {alert('Primero debe seleccionar una familia')}
      else if (e.target.name == 'Segmento' && familiaSelect.value) {fillSeqSelects('clase',e.target.value,claseSelect)}
     if(e.target.name == 'Clase' && !segmentoSelect.value) {alert('Primero debe seleccionar un segmento')}
@@ -158,18 +158,22 @@ export default function ProductoForm(props) {
    <button className='actionsButton' onClick={e=>{props.setProductoForm(false)}}>Cerrar</button>       
    <button className='actionsButton' onClick={e=>{handleSend(e)}}>Guardar datos</button>
     <h1 className='productoFormTitle'>Crear o modificar Producto</h1>
-
-    <h5 className='sameLineLabel'>Familia:</h5>
     <br/>
-      <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'20.6%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
-    <br/>  
-    <h5 className='sameLineLabel'>Segmento:</h5>
-    <br/>
-      <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'20.6%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
-    <br/>    
-    <h5 className='sameLineLabel'>Clase:</h5>
-    <br/>
-      <select name='Clase' className='Clase sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'20.6%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+      <div className='codeSeqDiv' style={{'marginLeft':'0'}}>
+       <h5 className='sameLineLabel'>Familia:</h5> 
+       <br/>
+       <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+      </div> 
+      <div className='codeSeqDiv'>
+       <h5 className='sameLineLabel'>Segmento:</h5> 
+       <br/>
+       <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+      </div>
+      <div className='codeSeqDiv' >
+       <h5 className='sameLineLabel'>Clase:</h5>
+       <br/>
+       <select name='Clase' className='Clase sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+      </div> 
     <br/>    
     <h5 className='sameLineLabel'>Código:</h5>
     <br/>
