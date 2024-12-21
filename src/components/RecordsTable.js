@@ -13,17 +13,16 @@ export default function RecordsTable(props) {
  var lastSelectedRecord = useRef(false)
  const [editForm,setEditForm] = useState(false)
  var targetValue = useRef(false)
- var selectedRoute = useRef(false)
 
  useEffect(()=>{
   if(props.sectionFormRoute == '/producto') {  
-   let familiaRecordsTable = document.getElementsByClassName('FamiliaRecordsTable')[0]
-   let segmentoRecordsTable = document.getElementsByClassName('SegmentoRecordsTable')[0]
-   let claseRecordsTable = document.getElementsByClassName('ClaseRecordsTable')[0]  
+   let familiaRecordsTableSelect = document.getElementsByClassName('FamiliaRecordsTableSelect')[0]
+   let segmentoRecordsTableSelect = document.getElementsByClassName('SegmentoRecordsTableSelect')[0]
+   let claseRecordsTableSelect = document.getElementsByClassName('ClaseRecordsTableSelect')[0]  
 
-   reqSeqData('familia',familiaRecordsTable)
-   reqSeqData('segmento',segmentoRecordsTable)
-   reqSeqData('clase',claseRecordsTable)
+   reqSeqData('familia',familiaRecordsTableSelect)
+   reqSeqData('segmento',segmentoRecordsTableSelect)
+   reqSeqData('clase',claseRecordsTableSelect)
  }})
 
  function reqSeqData(route,element) {
@@ -38,9 +37,9 @@ export default function RecordsTable(props) {
     };element.value = ''  }) }
 
  function handleSeqSearch(route,e) {
-  let familiaRecordsTable = document.getElementsByClassName('FamiliaRecordsTable')[0]
-  let segmentoRecordsTable = document.getElementsByClassName('SegmentoRecordsTable')[0]
-  let claseRecordsTable = document.getElementsByClassName('ClaseRecordsTable')[0] 
+  let familiaRecordsTableSelect = document.getElementsByClassName('FamiliaRecordsTableSelect')[0]
+  let segmentoRecordsTableSelect = document.getElementsByClassName('SegmentoRecordsTableSelect')[0]
+  let claseRecordsTableSelect = document.getElementsByClassName('ClaseRecordsTableSelect')[0] 
   if (e.target.value) {
     targetValue.current = e.target.value
     fetch(`http://${window.location.hostname}:8001/${route}/`,{
@@ -50,35 +49,15 @@ export default function RecordsTable(props) {
     })
     .then(re=>re.json()) 
     .then(re=>{
-      familiaRecordsTable.value = ''
-      segmentoRecordsTable.value = ''
-      claseRecordsTable.value = ''
+      familiaRecordsTableSelect.value = ''
+      segmentoRecordsTableSelect.value = ''
+      claseRecordsTableSelect.value = ''
       e.target.value = targetValue.current
       targetValue.current = false
-
-      let divTable = document.getElementsByClassName('divTable')[0]
-      let tableHtml = document.createElement('table')
-      divTable.innerHTML = ''
-      tableHtml.id = 'table'
-      divTable.appendChild(tableHtml)
-
-      var table = new DataTable('#table', {
-        columns: [...re['columns']], 
-        data:re['records'],
-        responsive: 'true',
-        select: 'single',
-      })
-      table.on('dblclick', 'tr', function () {
-       let rowData = table.row(this).data()
-       if(rowData){
-        lastSelectedRecord.current=rowData[0]
-        handleSearchRecord(rowData[0])
-       }}) 
-      table.on('click', 'tr', function () {
-       let rowData = table.row(this).data()
-       if(rowData){
-        lastSelectedRecord.current=rowData[0]
-    }}) }) } }
+      refreshDataTableDinamically(re)
+      if(e.target.name == 'FamiliaRecordsTableSelect' && e.target.value) {fillSeqSelects('segmento',e.target.value,segmentoRecordsTableSelect)}  
+      if(e.target.name == 'SegmentoRecordsTableSelect' && e.target.value) {fillSeqSelects('clase',e.target.value,claseRecordsTableSelect)}    
+  }) } }
 
  function refreshDataTable () {
   setTimeout((()=>{
@@ -110,6 +89,31 @@ export default function RecordsTable(props) {
     }})  
 }) }),50) }
  
+ function refreshDataTableDinamically (data) {
+  let divTable = document.getElementsByClassName('divTable')[0]
+  let tableHtml = document.createElement('table')
+  divTable.innerHTML = ''
+  tableHtml.id = 'table'
+  divTable.appendChild(tableHtml)
+
+  var table = new DataTable('#table', {
+    columns: [...data['columns']], 
+    data:data['records'],
+    responsive: 'true',
+    select: 'single',
+  })
+  table.on('dblclick', 'tr', function () {
+   let rowData = table.row(this).data()
+   if(rowData){
+    lastSelectedRecord.current=rowData[0]
+    handleSearchRecord(rowData[0])
+   }}) 
+  table.on('click', 'tr', function () {
+   let rowData = table.row(this).data()
+   if(rowData){
+    lastSelectedRecord.current=rowData[0]
+   } }) }
+
  function handleEditFormToDisplay(route) {if(route == '/producto') {props.setProductoForm(true)}else{setEditForm(true)}} 
 
  function handleSearchRecord(recordCode) {if(props.sectionFormRoute == '/producto') {props.setProductoForm(`updt_${recordCode}`)}else{setEditForm(`updt_${lastSelectedRecord.current}`)}}
@@ -122,6 +126,36 @@ export default function RecordsTable(props) {
   })
   .then(re=>re.json())
   .then(re=>{if(re['msg'] == 'ok') {refreshDataTable()}}) }
+
+  function fillSeqSelects(route,toFilter,element) {
+    let value = toFilter
+    fetch(`http://${window.location.hostname}:8001/${route}/`,{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({mode:'listFilteredRecords',payload:value})
+    })
+    .then(e=>e.json())
+    .then(e=>{
+      element.innerHTML = ''
+      if(e.length) {
+       for(let optionRecord of e) {
+        let option = document.createElement('option')
+        option.value = optionRecord['ID']
+        option.innerText = optionRecord['Descripcion']
+        element.appendChild(option)
+      }};element.value = ''
+    })}  
+
+  function resetTableAndOptions(e) {
+    e.preventDefault()
+    let familiaRecordsTableSelect = document.getElementsByClassName('FamiliaRecordsTableSelect')[0]
+    let segmentoRecordsTableSelect = document.getElementsByClassName('SegmentoRecordsTableSelect')[0]
+    let claseRecordsTableSelect = document.getElementsByClassName('ClaseRecordsTableSelect')[0]      
+    reqSeqData('familia',familiaRecordsTableSelect)
+    reqSeqData('segmento',segmentoRecordsTableSelect)
+    reqSeqData('clase',claseRecordsTableSelect)
+    refreshDataTable()
+  } 
 
   refreshDataTable()
 
@@ -136,18 +170,21 @@ export default function RecordsTable(props) {
       {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable' style={{'marginLeft':'0'}}>
        <h5 className='sameLineLabel'>Familia:</h5> 
        <br/>
-       <select name='FamiliaRecordsTable' className='FamiliaRecordsTable sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('familia',e)}} required={true}></select>      
+       <select name='FamiliaRecordsTableSelect' className='FamiliaRecordsTableSelect sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('familia',e)}} required={true}></select>      
       </div>}
       {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable'>
        <h5 className='sameLineLabel'>Segmento:</h5> 
        <br/>
-       <select name='SegmentoRecordsTable' className='SegmentoRecordsTable sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('segmento',e)}} required={true}></select>      
+       <select name='SegmentoRecordsTableSelect' className='SegmentoRecordsTableSelect sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('segmento',e)}} required={true}></select>      
       </div>}
       {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable'>
        <h5 className='sameLineLabel'>Clase:</h5>
        <br/>
-       <select name='ClaseRecordsTable' className='ClaseRecordsTable sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('clase',e)}} required={true}></select>      
+       <select name='ClaseRecordsTableSelect' className='ClaseRecordsTableSelect sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('clase',e)}} required={true}></select>      
      </div>}
+     {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable'>
+       <a className='sameLineLabel' href='' style={{'textDecoration':'none','position':'absolute','marginTop':'-19px'}} onClick={(e)=>{resetTableAndOptions(e)}}>Eliminar filtros</a>
+     </div>}     
    <div className="divTable">    
      <table id="table"></table>     
    </div>

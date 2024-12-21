@@ -55,7 +55,7 @@ export default function ProductoForm(props) {
         setUpdt(true) 
         for(let elementName of Object.keys(re.specificRecord[0])){
          let element = document.getElementsByClassName(`${elementName}`)[0]
-         if (elementName == 'Codigo') {element.focus();codeInitValue.current = re.specificRecord[0][elementName]}
+         if (elementName == 'Descripcion') {element.focus();codeInitValue.current = re.specificRecord[0][elementName]}
          if(element){element.value = re.specificRecord[0][elementName]} }
        
         if(re.specificRecord[0].FichaTecnica == 'True') {
@@ -135,7 +135,6 @@ export default function ProductoForm(props) {
    } })}
 
  function handleSequenceInt(e) {
-    console.log('----------->',e.target.value)
     let codigo = document.getElementsByClassName('Codigo')[0]
     let familiaSelect = document.getElementsByClassName('Familia')[0]
     let segmentoSelect = document.getElementsByClassName('Segmento')[0]
