@@ -167,6 +167,7 @@ export default function RecordsTable(props) {
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
       <br/>
+      <h3 style={{'margin':'30px 0 0 0'}}>Filtrar productos en base a:</h3>
       {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable' style={{'marginLeft':'0'}}>
        <h5 className='sameLineLabel'>Familia:</h5> 
        <br/>
@@ -183,7 +184,7 @@ export default function RecordsTable(props) {
        <select name='ClaseRecordsTableSelect' className='ClaseRecordsTableSelect sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSeqSearch('clase',e)}} required={true}></select>      
      </div>}
      {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable'>
-       <a className='sameLineLabel' href='' style={{'textDecoration':'none','position':'absolute','marginTop':'-19px'}} onClick={(e)=>{resetTableAndOptions(e)}}>Eliminar filtros</a>
+       <a className='sameLineLabel' href='' style={{'textDecoration':'none','margin':'0 0 0 10px'}} onClick={(e)=>{resetTableAndOptions(e)}}>Eliminar filtros</a>
      </div>}     
    <div className="divTable">    
      <table id="table"></table>     

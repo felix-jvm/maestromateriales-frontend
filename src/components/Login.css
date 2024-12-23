@@ -46,6 +46,11 @@
     background-color:rgb(255, 255, 255);
 }
 
+.saveProcButton:hover {
+    background-color: rgba(91, 0, 148, 0.122);
+    cursor: pointer;
+}
+
 @media screen and (max-width:1300px){
     .loginInput {
         margin:0;
