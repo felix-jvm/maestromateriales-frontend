@@ -20,10 +20,10 @@ export default function ProductoForm(props) {
  useEffect(()=>{
   var re = false
   setTimeout(()=>{
-    fetch(`http://${window.location.hostname}:8001/familia/`)
+    fetch(`http://${window.location.hostname}:8001/segmento/`)
     .then(e=>e.json())
     .then(e=>{
-      let familiaSelect = document.getElementsByClassName('Familia')[0]
+      let familiaSelect = document.getElementsByClassName('Segmento')[0]
       for(let optionRecord of e) {
        let option = document.createElement('option')
        option.value = optionRecord['ID']
@@ -79,7 +79,7 @@ export default function ProductoForm(props) {
     body:JSON.stringify({'mode':'create',payload})
   })
   .then(re=>re.json())
-  .then(re=>{if(re['msg'].length > 5){setDuplCodeError(re['msg']);codeError.current=true}})
+  // .then(re=>{if(re['msg'].length > 5){setDuplCodeError(re['msg']);codeError.current=true}})
   setTimeout(()=>{
    if (archive && !duplCodeError) {
     let productCode = productoForm['Codigo'].value
@@ -90,8 +90,10 @@ export default function ProductoForm(props) {
     fetch(`http://${window.location.hostname}:8001/producto/`,{
        method:'POST',
        body:formData
-    })}if(codeError.current){codeError.current=false}else{props.setProductoForm(false)}},200)
-  }
+    })}
+    props.setProductoForm(false)
+    // if(codeError.current){codeError.current=false}else{props.setProductoForm(false)}
+  },200)}
 
 
  const handleImageUpload = (event) => {
@@ -136,16 +138,14 @@ export default function ProductoForm(props) {
 
  function handleSequenceInt(e) {
     let codigo = document.getElementsByClassName('Codigo')[0]
-    let familiaSelect = document.getElementsByClassName('Familia')[0]
     let segmentoSelect = document.getElementsByClassName('Segmento')[0]
+    let familiaSelect = document.getElementsByClassName('Familia')[0]
     let claseSelect = document.getElementsByClassName('Clase')[0]
-    if(e.target.name == 'Familia' && e.target.value) {fillSeqSelects('segmento',e.target.value,segmentoSelect);claseSelect.innerText = ''}
-    if(e.target.name == 'Segmento' && !familiaSelect.value) {alert('Primero debe seleccionar una familia')}
-     else if (e.target.name == 'Segmento' && familiaSelect.value) {fillSeqSelects('clase',e.target.value,claseSelect)}
-    if(e.target.name == 'Clase' && !segmentoSelect.value) {alert('Primero debe seleccionar un segmento')}
+    if(e.target.name == 'Segmento' && e.target.value) {fillSeqSelects('familia',e.target.value,familiaSelect);claseSelect.innerText = ''}
+    if(e.target.name == 'Familia' && !segmentoSelect.value) {alert('Primero debe seleccionar un segmento')}
+     else if (e.target.name == 'Familia' && segmentoSelect.value) {fillSeqSelects('clase',e.target.value,claseSelect)}
+    if(e.target.name == 'Clase' && !familiaSelect.value) {alert('Primero debe seleccionar una familia')}
      else if (e.target.name == 'Clase' && segmentoSelect.value) {fillSeqSelects('producto',claseSelect.value,claseSelect,true)}
-    codigo.value = '' 
-
  } 
 
  return (
@@ -158,16 +158,16 @@ export default function ProductoForm(props) {
    <button className='actionsButton' onClick={e=>{handleSend(e)}}>Guardar datos</button>
     <h1 className='productoFormTitle'>Crear o modificar Producto</h1>
     <br/>
+      <div className='codeSeqDiv'>
+       <h5 className='sameLineLabel'>Segmento:</h5> 
+       <br/>
+       <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+      </div>    
       <div className='codeSeqDiv' style={{'marginLeft':'0'}}>
        <h5 className='sameLineLabel'>Familia:</h5> 
        <br/>
        <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
       </div> 
-      <div className='codeSeqDiv'>
-       <h5 className='sameLineLabel'>Segmento:</h5> 
-       <br/>
-       <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
-      </div>
       <div className='codeSeqDiv' >
        <h5 className='sameLineLabel'>Clase:</h5>
        <br/>
