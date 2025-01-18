@@ -4,6 +4,8 @@ import InlineCategoriaForm from './inlineForms/InlineCategoriaForm';
 import InlineEstadoMaterialForm from './inlineForms/InlineEstadoMaterialForm';
 import InlineProveedorForm from './inlineForms/InlineProveedorForm';
 import InlineUnidadMedidaForm from './inlineForms/InlineUnidadMedidaForm';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import './ProductoForm.css';
 
 export default function ProductoForm(props) {
@@ -159,86 +161,105 @@ export default function ProductoForm(props) {
     <h1 className='productoFormTitle'>Crear o modificar Producto</h1>
     <br/>
       <div className='codeSeqDiv'>
-       <h5 className='sameLineLabel'>Segmento:</h5> 
+       <a className='sameLineLabel' data-tooltip-id='SegmentoProductLabel' data-tooltip-content='Segmento'>SEGMENTO:</a> 
+       <Tooltip id='SegmentoProductLabel'/>
        <br/>
        <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
       </div>    
       <div className='codeSeqDiv' style={{'marginLeft':'0'}}>
-       <h5 className='sameLineLabel'>Familia:</h5> 
+       <a className='sameLineLabel' data-tooltip-id='FamiliaProductLabel' data-tooltip-content='Familia'>FAMILIA:</a>
+       <Tooltip id='FamiliaProductLabel'/> 
        <br/>
        <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
       </div> 
       <div className='codeSeqDiv' >
-       <h5 className='sameLineLabel'>Clase:</h5>
+       <a className='sameLineLabel' data-tooltip-id='ClaseProductLabel' data-tooltip-content='Clase'>CLASE:</a>
+       <Tooltip id='ClaseProductLabel'/>
        <br/>
        <select name='Clase' className='Clase sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
       </div> 
     <br/>    
-    <h5 className='sameLineLabel'>Código:</h5>
+    <a className='sameLineLabel' data-tooltip-id='CódigoProductLabel' data-tooltip-content='CÓDIGO UNSPSC'>CÓDIGO:</a>
+    <Tooltip id='CódigoProductLabel'/>
     <br/>
       <input type='text' name='Codigo' className='sameLineInput Codigo' readOnly={true} required={true}/>
     <br/>
-    <h5 className='sameLineLabel'>Descripción:</h5>
+    <a className='sameLineLabel' data-tooltip-id='DescripciónProductLabel' data-tooltip-content='DESCRIPCIÓN UNSPSC'>DESCRIPCIÓN:</a>
+    <Tooltip id='DescripciónProductLabel'/>
     <br/>
       <input name='Descripcion' className='sameLineInput Descripcion' onBlur={e=>{handleUpdtProp(e,'element')}} style={{'minWidth':'80%'}}/>  
     <br/>
-    <h5 className='sameLineLabel'>Estado Material:</h5>
-    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'estadomaterial','EstadoMaterial')}}>Agregar Estado Material</a>
+    <a className='sameLineLabel' data-tooltip-id='estadoMaterialProductLabel' data-tooltip-content='ACTIVO, OBSOLETO, DESCONTINUADO'>ESTADO MATERIAL:</a>
+    <Tooltip id='estadoMaterialProductLabel'/>    
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'estadomaterial','EstadoMaterial')}}>AGREGAR ESTADO MATERIAL</a>
     <br/>
       <select name='EstadoMaterial' className='EstadoMaterial sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
-    <h5 className='sameLineLabel'>Categoria:</h5>
-    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'categoria','Categoria')}}>Agregar Categoria</a>
+    <a className='sameLineLabel' data-tooltip-id='CategoriaProductLabel' data-tooltip-content='CATEGORIA'>CATEGORIA:</a>
+    <Tooltip id='CategoriaProductLabel'/>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'categoria','Categoria')}}>AGREGAR CATEGORIA</a>
     <br/>    
       <select name='Categoria' className='sameLineInput Categoria'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>
-    <h5 className='sameLineLabel'>Unidad Medida:</h5>
-    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'unidadmedida','UnidadMedida')}}>Agregar Unidad Medida</a>
+    <a className='sameLineLabel' data-tooltip-id='UnidadMedidaProductLabel' data-tooltip-content='UNIDAD DE MEDIDA'>U/M:</a>
+    <Tooltip id='UnidadMedidaProductLabel'/>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'unidadmedida','UnidadMedida')}}>AGREGAR UNIDAD DE MEDIDA</a>
     <br/>    
       <select name='UnidadMedida' className='sameLineInput UnidadMedida' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
-    <h5 className='sameLineLabel'>Minimo:</h5>
+    <a className='sameLineLabel' data-tooltip-id='MinimoProductLabel' data-tooltip-content='SEGURIDAD ANTE EVENTOS'>MINIMO:</a>
+    <Tooltip id='MinimoProductLabel'/>
     <br/>    
       <input type='number' name='Minimo' className='sameLineInput Minimo'  onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/> 
-    <h5 className='sameLineLabel'>Maximo:</h5>
+    <a className='sameLineLabel' data-tooltip-id='MaximoProductLabel' data-tooltip-content='NIVEL MAXIMO PARA EVITAR OBSOLECENCIA'>MAXIMO:</a>
+    <Tooltip id='MaximoProductLabel'/>    
     <br/>    
       <input type='number' name='Maximo' className='sameLineInput Maximo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Punto Reorden:</h5>
+    <a className='sameLineLabel' data-tooltip-id='puntoReordenProductLabel' data-tooltip-content='NIVEL DEL INVENTARIO PARA PEDIDO'>PUNTO REORDEN:</a>
+    <Tooltip id='puntoReordenProductLabel'/>
     <br/>    
       <input type='number' name='PuntoReorden' className='sameLineInput PuntoReorden' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Proveedor:</h5>
-    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'proveedor','Proveedor')}}>Agregar Proveedor</a>
+    <a className='sameLineLabel' data-tooltip-id='proveedorProductLabel' data-tooltip-content='PROVEEDOR'>PROVEEDOR:</a>
+    <Tooltip id='proveedorProductLabel'/>
+    <a className='inlineFormLabel' href='' onClick={(e)=>{handleDisplayInlineForm(e,'proveedor','Proveedor')}}>AGREGAR PROVEEDOR</a>
     <br/>    
       <select name='Proveedor' className='sameLineInput Proveedor' style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'40%'}} onBlur={e=>{handleUpdtProp(e,'element')}}></select>
     <br/>  
-    <h5 className='sameLineLabel'>Tiempo Entrega:</h5>
-    <br/>    
+    <a className='sameLineLabel' data-tooltip-id='tiempoEntregaProductLabel' data-tooltip-content='DIAS'>TIEMPO DE ENTREGA:</a>
+    <Tooltip id='tiempoEntregaProductLabel'/>
+    <br/>
       <input type='number' name='TiempoEntrega' className='sameLineInput TiempoEntrega' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>
-    <h5 className='sameLineLabel'>Pedido Estandar:</h5>
+    <a className='sameLineLabel' data-tooltip-id='pedidoEstandarProductLabel' data-tooltip-content='CANTIDAD ACOSTUMBRADA DEL PEDIDO'>PEDIDO ESTANDAR:</a>
+    <Tooltip id='pedidoEstandarProductLabel'/>
     <br/>    
       <input type='number' name='PedidoEstandar' className='sameLineInput PedidoEstandar' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Lote Minimo:</h5>
+    <a className='sameLineLabel' data-tooltip-id='loteMinimoProductLabel' data-tooltip-content='BASADO EN COSTO BENEFICIO'>LOTE MINIMO:</a>
+    <Tooltip id='loteMinimoProductLabel'/>
     <br/>    
       <input type='number' name='LoteMinimo' className='sameLineInput LoteMinimo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Lote Maximo:</h5>
+    <a className='sameLineLabel' data-tooltip-id='loteMaximoProductLabel' data-tooltip-content='CAPACIDAD DE ALMACENAMIENTO GENERAL'>LOTE MAXIMO:</a>
+    <Tooltip id='loteMaximoProductLabel'/>
     <br/>    
       <input type='number' name='LoteMaximo' className='sameLineInput LoteMaximo' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Tiempo Proceso Interno:</h5>
+    <a className='sameLineLabel' data-tooltip-id='tiempoProcesoInternoProductLabel' data-tooltip-content='DESDE EL PEDIDO HASTA LA RECEPCIÓN'>TIEMPO PROCESO INTERNO:</a>
+    <Tooltip id='tiempoProcesoInternoProductLabel'/>
     <br/>    
       <input type='number' name='TiempoProcesoInterno' className='sameLineInput TiempoProcesoInterno' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>  
-    <h5 className='sameLineLabel'>Tiempo Vida Util:</h5>
+    <a className='sameLineLabel' data-tooltip-id='tiempoVidaUtilProductLabel' data-tooltip-content='CICLO DE VIDA/DIAS'>TIEMPO VIDA UTIL:</a>
+    <Tooltip id='tiempoVidaUtilProductLabel'/>
     <br/>    
       <input type='number' name='TiempoVidaUtil' className='sameLineInput TiempoVidaUtil' onBlur={e=>{handleUpdtProp(e,'element')}}/>
     <br/>        
-    <h5 className='sameLineLabel' style={{'display':'block','margin': '0 0 0 0','position':'relative'}}>FichaTecnica:</h5> 
+    <a className='sameLineLabel' data-tooltip-id='fichaTecnicaProductLabel' data-tooltip-content='ALMACENAMIENTO, STOCKING, ETC.' style={{'display':'block','margin': '10px 0 10px 0','position':'relative'}}>FICHA TECNICA:</a> 
+    <Tooltip id='fichaTecnicaProductLabel'/>
       <input type="file" accept="image/*" onChange={handleImageUpload} className='sameLineInput'/> 
       {image && (
         <img
@@ -248,7 +269,8 @@ export default function ProductoForm(props) {
           className='imageElement'
           onClick={handleImageClick}
         />
-      )}         
+      )}   
+      <br/>      
    </form>
   </div>  
   {inlineForm && ( (inlineForm.split(',')[0]=='categoria' && <InlineCategoriaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 

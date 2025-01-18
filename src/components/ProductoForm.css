@@ -1,6 +1,6 @@
 .productoFormOuterCont {
   width:100vw;  
-  height:100vh;
+  height:99.9%;
   position:absolute;
   display:inline-block;
   z-index:3000;
@@ -10,14 +10,20 @@
 
 .productoFormInnerCont {
   width:70%;  
-  height:100%;
+  height:99.5%;
   background-color: rgb(194, 194, 197);
   border:1px solid rgb(186, 186, 186);
   margin:0 auto 0 auto;
   overflow:auto;
-  padding:30px 10px 150px 10px;
+  padding:0 0 0 10px;
   position:relative;
   box-shadow:1px 1px 8px gray;
+}
+
+.productoForm {
+ display:block; 
+ position:relative;
+ height:1480px;
 }
 
 .productoFormTitle {
@@ -27,11 +33,15 @@
 
 .sameLineLabel {
   display:inline-block;
-  width:fit-content;
+  width:max-content;
+  height:22px;
   position:relative;
-  margin:0;
+  margin:10px 0 15px 0;
   box-sizing: border-box;
-  padding:10px 0 0 0;
+  padding-top:2px;
+  border-radius:3px;
+  font-weight:900;
+  border-bottom:1px solid black;
 }
 
 .sameLineInput {
@@ -84,8 +94,10 @@
 
 .inlineFormLabel {
   font-size:13px;
+  display: inline-block;
   text-decoration:none;
   margin:0 0 0 0.5%;
+  padding:5px 0 0 0;
 }
 
 .codeSeqDiv {
