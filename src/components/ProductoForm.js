@@ -41,6 +41,7 @@ export default function ProductoForm(props) {
     .then(e=>e.json())
     .then(e=>{
      re = e 
+     console.log('------------------------------->',re)
      for(let selectName of Object.keys(e)) {
       if (selectName == 'specificRecord') {continue}
       let selectElement = document.getElementsByClassName(`${selectName}`)[0]
