@@ -41,7 +41,6 @@ export default function ProductoForm(props) {
     .then(e=>e.json())
     .then(e=>{
      re = e 
-     console.log('------------------------------->',re)
      for(let selectName of Object.keys(e)) {
       if (selectName == 'specificRecord') {continue}
       let selectElement = document.getElementsByClassName(`${selectName}`)[0]
@@ -57,7 +56,8 @@ export default function ProductoForm(props) {
       if(re.specificRecord && re.specificRecord.length) {
         setUpdt(true) 
         for(let elementName of Object.keys(re.specificRecord[0])){
-         let element = document.getElementsByClassName(`${elementName}`)[0]
+          let element = document.getElementsByClassName(`${elementName}`)[0]
+          console.log('------------------------------->',elementName,element) 
          if (elementName == 'Descripcion') {element.focus();codeInitValue.current = re.specificRecord[0][elementName]}
          if(element){element.value = re.specificRecord[0][elementName]} }
        
@@ -68,7 +68,7 @@ export default function ProductoForm(props) {
            body:JSON.stringify({'mode':'request_ficha_tecnica','productCode':props.productoForm})
          })    
          .then((res)=>res.blob())
-         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 300) },[])
+         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 2300) },[])
    
  function handleSend(e) {
   e.preventDefault()  
