@@ -51,7 +51,7 @@ export default function ProductoForm(props) {
         option.innerText = options['Descripcion']
         selectElement.appendChild(option)
         selectElement.value = ''
-    } } }) },150)
+    } } }) },200)
     
   setTimeout(()=>{
       if(re.specificRecord && re.specificRecord.length) {
@@ -96,7 +96,7 @@ export default function ProductoForm(props) {
     })}
     props.setProductoForm(false)
     // if(codeError.current){codeError.current=false}else{props.setProductoForm(false)}
-  },200)}
+  },400)}
 
 
  const handleImageUpload = (event) => {
