@@ -50,14 +50,13 @@ export default function ProductoForm(props) {
         option.innerText = options['Descripcion']
         selectElement.appendChild(option)
         selectElement.value = ''
-    } } }) },200)
+    } } }) },150)
     
   setTimeout(()=>{
       if(re.specificRecord && re.specificRecord.length) {
         setUpdt(true) 
         for(let elementName of Object.keys(re.specificRecord[0])){
-          let element = document.getElementsByClassName(`${elementName}`)[0]
-          console.log('------------------------------->',elementName,element) 
+          let element = document.getElementsByClassName(`${elementName}`)[0] 
          if (elementName == 'Descripcion') {element.focus();codeInitValue.current = re.specificRecord[0][elementName]}
          if(element){element.value = re.specificRecord[0][elementName]} }
        
@@ -68,7 +67,7 @@ export default function ProductoForm(props) {
            body:JSON.stringify({'mode':'request_ficha_tecnica','productCode':props.productoForm})
          })    
          .then((res)=>res.blob())
-         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 2300) },[])
+         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 500) },[])
    
  function handleSend(e) {
   e.preventDefault()  
