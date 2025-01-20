@@ -67,7 +67,7 @@ export default function ProductoForm(props) {
            body:JSON.stringify({'mode':'request_ficha_tecnica','productCode':props.productoForm})
          })    
          .then((res)=>res.blob())
-         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 500) },[])
+         .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 350) },[])
    
  function handleSend(e) {
   e.preventDefault()  
