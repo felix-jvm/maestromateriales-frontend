@@ -51,7 +51,7 @@ export default function ProductoForm(props) {
         option.innerText = options['Descripcion']
         selectElement.appendChild(option)
         selectElement.value = ''
-    } } }) },100)
+    } } }) },250)
     
   setTimeout(()=>{
       if(re.specificRecord && re.specificRecord.length) {
