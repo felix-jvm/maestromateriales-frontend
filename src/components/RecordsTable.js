@@ -152,6 +152,15 @@ export default function RecordsTable(props) {
     refreshDataTable()
   } 
 
+  function generateProductRecords() {
+    fetch(`http://${window.location.hostname}:8001/producto/`,{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     'body':JSON.stringify({mode:'generateProductRecords'})})
+     .then(re=>re.json())
+     .then(re=>{if(re['msg'] == 'ok') {alert('Archivo generado correctamente')}})     
+    }
+
   refreshDataTable()
 
  return (
@@ -161,6 +170,7 @@ export default function RecordsTable(props) {
     (props.sectionFormRoute == '/proveedor' && 'Proveedores')}</h1>
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
+   {props.sectionFormRoute == '/producto' && <button className='recordButton' onClick={()=>{generateProductRecords()}}>Generar archivo de productos</button>}
       <br/>
       {props.sectionFormRoute == '/producto' && <h3 style={{'margin':'30px 0 0 0'}}>Filtrar productos en base a:</h3>}
       {props.sectionFormRoute == '/producto' && <div className='codeSeqDivRecordsTable'>
