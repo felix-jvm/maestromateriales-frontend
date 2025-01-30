@@ -30,7 +30,7 @@ export default function ProductoForm(props) {
       for(let optionRecord of e) {
        let option = document.createElement('option')
        option.value = optionRecord['ID']
-       option.innerText = optionRecord['Descripcion']
+       option.innerText = `${optionRecord['Codigo']} - ${optionRecord['Descripcion']}`
        familiaSelect.appendChild(option)
       }familiaSelect.value = ''})
 
@@ -131,7 +131,7 @@ export default function ProductoForm(props) {
      for(let optionRecord of e) {
       let option = document.createElement('option')
       option.value = optionRecord['ID']
-      option.innerText = optionRecord['Descripcion']
+      option.innerText = `${optionRecord['Codigo']} - ${optionRecord['Descripcion']}`
       element.appendChild(option)
     }};element.value = ''
    } else {

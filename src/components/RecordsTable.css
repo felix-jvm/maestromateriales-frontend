@@ -659,7 +659,8 @@ div.dt-container .dt-search input {
   padding: 5px;
   background-color: transparent;
   color: inherit;
-  margin-left: 3px;
+  margin:0 0 3px 3px;
+  width:350px;
 }
 div.dt-container .dt-input {
   border: 1px solid #aaa;
