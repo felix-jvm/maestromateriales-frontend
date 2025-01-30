@@ -9,11 +9,12 @@ import 'react-tooltip/dist/react-tooltip.css';
 import './ProductoForm.css';
 
 export default function ProductoForm(props) {
- const [updt,setUpdt] = useState(false)
+ const [updt, setUpdt] = useState(false)
  const [image, setImage] = useState(false)
  const [archive, setArchive] = useState(false)
- const [duplCodeError,setDuplCodeError] = useState(false)
- const [inlineForm,setInlineForm] = useState(false)
+ const [duplCodeError, setDuplCodeError] = useState(false)
+ const [inlineForm, setInlineForm] = useState(false)
+ const [fichaTecnicaType, setFichaTecnicaType] = useState(false)
  var codeInitValue = useRef(false)
  var payload = useRef({})
  var codeError = useRef(false)
@@ -66,7 +67,7 @@ export default function ProductoForm(props) {
            'headers':{'Content-Type':'application/json'},
            body:JSON.stringify({'mode':'request_ficha_tecnica','productCode':props.productoForm})
          })    
-         .then((res)=>res.blob())
+         .then((res)=>{setFichaTecnicaType(res.headers.get('Content-Type'));return res.blob()})
          .then((res)=>{setImage(URL.createObjectURL(res))}) } } }, 400) },[])
    
  function handleSend(e) {
@@ -260,17 +261,16 @@ export default function ProductoForm(props) {
     <br/>        
     <a className='sameLineLabel' data-tooltip-id='fichaTecnicaProductLabel' data-tooltip-content='ALMACENAMIENTO, STOCKING, ETC.' style={{'display':'block','margin': '10px 0 10px 0','position':'relative'}}>FICHA TECNICA:</a> 
     <Tooltip id='fichaTecnicaProductLabel'/>
-      <input type="file" accept="image/*" onChange={handleImageUpload} className='sameLineInput'/> 
-      {image && (
-        <img
-          src={image}
-          alt="Uploaded"
-          style={{'display':'block','cursor':'pointer','margin': '1px 0 0 0','maxWidth':'100px','maxHeight':'100px' }}
-          className='imageElement'
-          onClick={handleImageClick}
-        />
-      )}   
-      <br/>      
+      <input type="file" onChange={handleImageUpload} className='sameLineInput'/> 
+      {image && fichaTecnicaType === 'application/pdf'? (<embed src={image} type="application/pdf" width="90%" height="400" style={{'margin':'5px 0 4px 0'}} onClick={handleImageClick}/>):(
+        image && (<img
+            src={image}
+            alt="Uploaded"
+            style={{'display':'block','cursor':'pointer','margin': '5px 0 0 0','maxWidth':'100px','maxHeight':'100px' }}
+            className='imageElement'
+            onClick={handleImageClick}
+        />) )}  
+      <br/>    
    </form>
   </div>  
   {inlineForm && ( (inlineForm.split(',')[0]=='categoria' && <InlineCategoriaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
