@@ -37,6 +37,18 @@ export default function SideMenu(props) {
                                 <div className="sb-nav-link-icon"><i className=""></i></div>
                                 Proveedor
                             </a>
+                            <a className="nav-link" href="charts.html" onClick={(e)=>{updateRoute(e,'/segmento')}}>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
+                                Segmento
+                            </a>
+                            <a className="nav-link" href="charts.html" onClick={(e)=>{updateRoute(e,'/familia')}}>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
+                                Familia
+                            </a>
+                            <a className="nav-link" href="charts.html" onClick={(e)=>{updateRoute(e,'/clase')}}>
+                                <div className="sb-nav-link-icon"><i className=""></i></div>
+                                Clase
+                            </a>                                                                                    
                         </div>
                     </div>
                     {/* <div className="sb-sidenav-footer">

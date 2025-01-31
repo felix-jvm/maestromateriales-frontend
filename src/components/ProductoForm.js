@@ -23,7 +23,7 @@ export default function ProductoForm(props) {
  useEffect(()=>{
   var re = false
   setTimeout(()=>{
-    fetch(`http://${window.location.hostname}:8001/segmento/`)
+   fetch(`http://${window.location.hostname}:8001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
     .then(e=>e.json())
     .then(e=>{
       let familiaSelect = document.getElementsByClassName('Segmento')[0]
@@ -34,11 +34,11 @@ export default function ProductoForm(props) {
        familiaSelect.appendChild(option)
       }familiaSelect.value = ''})
 
-    fetch(`http://${window.location.hostname}:8001/producto/`,{
+   fetch(`http://${window.location.hostname}:8001/producto/`,{
      'method':'POST',
      'headers':{'Content-Type':'application/json'},
      body:JSON.stringify({'mode':'fillForm','productCode':props.productoForm})
-    })
+   })
     .then(e=>e.json())
     .then(e=>{
      re = e 

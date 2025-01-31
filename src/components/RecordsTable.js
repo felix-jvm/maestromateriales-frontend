@@ -6,6 +6,9 @@ import ProveedorForm from './forms/ProveedorForm';
 import EstadoMaterialForm from './forms/EstadoMaterialForm';
 import UnidadMedidaForm from './forms/UnidadMedidaForm';
 import CategoriaForm from './forms/CategoriaForm';
+import SegmentoForm from './forms/SegmentoForm';
+import FamiliaForm from './forms/FamiliaForm';
+import ClaseForm from './forms/ClaseForm';
 
 DataTable.use(DT);
 export default function RecordsTable(props) {
@@ -26,7 +29,7 @@ export default function RecordsTable(props) {
  }})
 
  function reqSeqData(route,element) {
-  fetch(`http://${window.location.hostname}:8001/${route}/`)
+  fetch(`http://${window.location.hostname}:8001/${route}/`,{method:'POST', 'headers':{'Content-Type':'application/json'}, body:JSON.stringify({mode:'reqTableSeqRecords'})})
   .then(e=>e.json())
   .then(e=>{
     element.innerHTML = ''
@@ -181,7 +184,8 @@ export default function RecordsTable(props) {
   <div className='RecordsTableMainCont'>
    <h1 style={{'margin':'50px 0 0 0'}}>{(props.sectionFormRoute == '/producto' && 'Productos') || (props.sectionFormRoute == '/categoria' && 'Categorias') ||
     (props.sectionFormRoute == '/unidadmedida' && 'Unidades de medida') || (props.sectionFormRoute == '/estadomaterial' && 'Estados del material') || 
-    (props.sectionFormRoute == '/proveedor' && 'Proveedores')}</h1>
+    (props.sectionFormRoute == '/proveedor' && 'Proveedores') || (props.sectionFormRoute == '/segmento' && 'Segmentos') || 
+    (props.sectionFormRoute == '/familia' && 'Familias') || (props.sectionFormRoute == '/clase' && 'Clases')}</h1>
    <button className = 'recordButton' onClick = {()=>{handleEditFormToDisplay(props.sectionFormRoute)}}>Agregar</button>
    <button className = 'recordButton' onClick = {()=>{handleRemoveRecord(props.sectionFormRoute,lastSelectedRecord.current)}}>Eliminar</button> 
    {props.sectionFormRoute == '/producto' && <button className='recordButton' onClick={()=>{generateProductRecords()}}>Generar lista de productos</button>}
@@ -212,5 +216,8 @@ export default function RecordsTable(props) {
    {editForm && props.sectionFormRoute == '/categoria' && <CategoriaForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/unidadmedida' && <UnidadMedidaForm setEditForm={setEditForm} editForm={editForm}/>}
    {editForm && props.sectionFormRoute == '/estadomaterial' && <EstadoMaterialForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/segmento' && <SegmentoForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/familia' && <FamiliaForm setEditForm={setEditForm} editForm={editForm}/>}
+   {editForm && props.sectionFormRoute == '/clase' && <ClaseForm setEditForm={setEditForm} editForm={editForm}/>}   
   </div>  
  )}
