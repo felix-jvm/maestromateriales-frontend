@@ -4,6 +4,9 @@ import InlineCategoriaForm from './inlineForms/InlineCategoriaForm';
 import InlineEstadoMaterialForm from './inlineForms/InlineEstadoMaterialForm';
 import InlineProveedorForm from './inlineForms/InlineProveedorForm';
 import InlineUnidadMedidaForm from './inlineForms/InlineUnidadMedidaForm';
+import InlineSegmentoForm from './inlineForms/InlineSegmentoForm';
+import InlineFamiliaForm from './inlineForms/InlineFamiliaForm';
+import InlineClaseForm from './inlineForms/InlineClaseForm';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import './ProductoForm.css';
@@ -26,13 +29,20 @@ export default function ProductoForm(props) {
    fetch(`http://${window.location.hostname}:8001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
     .then(e=>e.json())
     .then(e=>{
-      let familiaSelect = document.getElementsByClassName('Segmento')[0]
-      for(let optionRecord of e) {
+      let segmentoSelect = document.getElementsByClassName('Segmento')[0]
+      for(let optionRecord of e) {       
        let option = document.createElement('option')
        option.value = optionRecord['ID']
        option.innerText = `${optionRecord['Codigo']} - ${optionRecord['Descripcion']}`
-       familiaSelect.appendChild(option)
-      }familiaSelect.value = ''})
+       segmentoSelect.appendChild(option)
+       
+       if(payload.current['updt_producto_codigo']){
+        let recordCodeSegmento = payload.current['updt_producto_codigo'].split('_')[0].slice(0,2)
+        if(optionRecord['Codigo']==recordCodeSegmento){
+         option.selected = true
+         handleSequenceInt(segmentoSelect,true)   
+        } }         
+      }!payload.current['updt_producto_codigo']? segmentoSelect.value = '':void 0})
 
    fetch(`http://${window.location.hostname}:8001/producto/`,{
      'method':'POST',
@@ -76,6 +86,7 @@ export default function ProductoForm(props) {
   payload.current['Codigo'] = productoForm.Codigo.value
   if(Object.keys(payload.current).includes('updt_producto_codigo') && productoForm.Codigo.value != codeInitValue.current) {payload.current = {...payload.current,'codeChanged':true}}
   payload = payload.current
+  console.log('---------------------------------',payload)
   fetch(`http://${window.location.hostname}:8001/producto/`,{
     'method':'POST',
     'headers':{'Content-Type':'application/json'},
@@ -115,7 +126,7 @@ export default function ProductoForm(props) {
 
  function handleDisplayInlineForm(e,route,element) {e.preventDefault();setInlineForm(`${route},${element}`)}
 
- function fillSeqSelects(route,toFilter,element,completedSeq=false) {
+ function fillSeqSelects(route,toFilter,element,completedSeq=false,autoFillSelect=false) {
   let value = toFilter
   let mode = !completedSeq? 'listFilteredRecords':'reqSeqCode'
   fetch(`http://${window.location.hostname}:8001/${route}/`,{
@@ -133,22 +144,33 @@ export default function ProductoForm(props) {
       option.value = optionRecord['ID']
       option.innerText = `${optionRecord['Codigo']} - ${optionRecord['Descripcion']}`
       element.appendChild(option)
-    }};element.value = ''
+
+      if(payload.current['updt_producto_codigo'] && autoFillSelect){
+        let recordCode = ''
+        if(route=='familia'){recordCode=payload.current['updt_producto_codigo'].split('_')[0].slice(0,4)}
+        else if(route=='clase'){recordCode=payload.current['updt_producto_codigo'].split('_')[0].slice(0,6)}
+        if(optionRecord['Codigo']==recordCode){
+         option.selected = true
+         handleSequenceInt(element,true)   
+      } }       
+
+    }};!payload.current['updt_producto_codigo']? element.value = '':void 0
    } else {
     let Codigo = document.getElementsByClassName('Codigo')[0]
-    if(e['seq']) {Codigo.value = e['seq']}
+    if(payload.current['updt_producto_codigo']){Codigo.value = payload.current['updt_producto_codigo']}
+    else if(e['seq']) {Codigo.value = e['seq']}
    } })}
 
- function handleSequenceInt(e) {
-    let codigo = document.getElementsByClassName('Codigo')[0]
+ function handleSequenceInt(e,autoFillSelect=false) {
+    // let codigo = document.getElementsByClassName('Codigo')[0]
     let segmentoSelect = document.getElementsByClassName('Segmento')[0]
     let familiaSelect = document.getElementsByClassName('Familia')[0]
     let claseSelect = document.getElementsByClassName('Clase')[0]
-    if(e.target.name == 'Segmento' && e.target.value) {fillSeqSelects('familia',e.target.value,familiaSelect);claseSelect.innerText = ''}
-    if(e.target.name == 'Familia' && !segmentoSelect.value) {alert('Primero debe seleccionar un segmento')}
-     else if (e.target.name == 'Familia' && segmentoSelect.value) {fillSeqSelects('clase',e.target.value,claseSelect)}
-    if(e.target.name == 'Clase' && !familiaSelect.value) {alert('Primero debe seleccionar una familia')}
-     else if (e.target.name == 'Clase' && segmentoSelect.value) {fillSeqSelects('producto',claseSelect.value,claseSelect,true)}
+    if(e.name == 'Segmento' && e.value) {fillSeqSelects('familia',e.value,familiaSelect,false,autoFillSelect);claseSelect.innerText = ''}
+    if(e.name == 'Familia' && !segmentoSelect.value) {alert('Primero debe seleccionar un segmento')}
+     else if (e.name == 'Familia' && segmentoSelect.value) {fillSeqSelects('clase',e.value,claseSelect,false,autoFillSelect)}
+    if(e.name == 'Clase' && !familiaSelect.value) {alert('Primero debe seleccionar una familia')}
+     else if (e.name == 'Clase' && segmentoSelect.value) {fillSeqSelects('producto',claseSelect.value,claseSelect,true,autoFillSelect)}
  } 
 
  return (
@@ -164,20 +186,23 @@ export default function ProductoForm(props) {
       <div className='codeSeqDiv'>
        <a className='sameLineLabel' data-tooltip-id='SegmentoProductLabel' data-tooltip-content='Segmento'>SEGMENTO:</a> 
        <Tooltip id='SegmentoProductLabel'/>
+       <a className='inlineFormLabel' href='' style={{'fontSize':'0.6vw','marginLeft':'5px'}} onClick={(e)=>{handleDisplayInlineForm(e,'segmento','Segmento')}}>AGREGAR SEGMENTO</a>
        <br/>
-       <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+       <select name='Segmento' className='Segmento sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e.target)}} required={true}></select>      
       </div>    
       <div className='codeSeqDiv' style={{'marginLeft':'0'}}>
        <a className='sameLineLabel' data-tooltip-id='FamiliaProductLabel' data-tooltip-content='Familia'>FAMILIA:</a>
        <Tooltip id='FamiliaProductLabel'/> 
+       <a className='inlineFormLabel' href='' style={{'fontSize':'0.6vw','marginLeft':'5px'}} onClick={(e)=>{handleDisplayInlineForm(e,'familia','Familia')}}>AGREGAR FAMILIA</a>
        <br/>
-       <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+       <select name='Familia' className='Familia sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e.target)}} required={true}></select>      
       </div> 
       <div className='codeSeqDiv' >
        <a className='sameLineLabel' data-tooltip-id='ClaseProductLabel' data-tooltip-content='Clase'>CLASE:</a>
        <Tooltip id='ClaseProductLabel'/>
+       <a className='inlineFormLabel' href='' style={{'fontSize':'0.6vw','marginLeft':'5px'}} onClick={(e)=>{handleDisplayInlineForm(e,'clase','Clase')}}>AGREGAR CLASE</a>
        <br/>
-       <select name='Clase' className='Clase sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e)}} required={true}></select>      
+       <select name='Clase' className='Clase sameLineInput'  style={{'padding':'0 0 0 5px','minHeight':'35px','maxHeight':'35px','minWidth':'100%','maxWidth':'100%'}} onClick={(e)=>{handleSequenceInt(e.target)}} required={true}></select>      
       </div> 
     <br/>    
     <a className='sameLineLabel' data-tooltip-id='CódigoProductLabel' data-tooltip-content='CÓDIGO UNSPSC'>CÓDIGO:</a>
@@ -276,7 +301,10 @@ export default function ProductoForm(props) {
   {inlineForm && ( (inlineForm.split(',')[0]=='categoria' && <InlineCategoriaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
   (inlineForm.split(',')[0]=='estadomaterial' && <InlineEstadoMaterialForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
   (inlineForm.split(',')[0]=='unidadmedida' && <InlineUnidadMedidaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
-  (inlineForm.split(',')[0]=='proveedor' && <InlineProveedorForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) )}
+  (inlineForm.split(',')[0]=='proveedor' && <InlineProveedorForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) || 
+  (inlineForm.split(',')[0]=='segmento' && <InlineSegmentoForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) ||
+  (inlineForm.split(',')[0]=='familia' && <InlineFamiliaForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) ||
+  (inlineForm.split(',')[0]=='clase' && <InlineClaseForm inlineForm={inlineForm} setInlineForm={setInlineForm} payload={payload}/>) )}
 
   {duplCodeError && <Modal displayInnerCont={true} reload={false} message={duplCodeError} setModal={setDuplCodeError} mainContColor={'black'} InnerContColor={'white'} 
     icon={<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">

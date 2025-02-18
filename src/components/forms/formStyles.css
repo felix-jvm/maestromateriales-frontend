@@ -1,16 +1,17 @@
 .formMainCont {
     width:99.9%;  
     height:99.9%;
-    position:absolute;
+    position:fixed;
+    display:inline-block;
     top:0;
     left:0;
-    z-index:2000;
+    z-index:3000;
   }
 
 .formInnerCont {
     background-color:rgb(194, 194, 197);  
     position:relative;
-    margin:7% 0 0 6%;
+    margin:7% auto 0 auto;
     width:65%;
     height:65%;
     border-radius:6px;
