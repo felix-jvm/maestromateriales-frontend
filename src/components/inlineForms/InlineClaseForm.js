@@ -39,7 +39,7 @@ export default function InlineClaseForm(props) {
         if(re['msg']=='ok') {
          let newOption = document.createElement('option')
          newOption.value = re['ID']
-         newOption.innerText = re['Descripcion']
+         newOption.innerText = `${re['Codigo']} - ${re['Descripcion']}`
          newOption.selected = true
          selectElement.appendChild(newOption)
         } })

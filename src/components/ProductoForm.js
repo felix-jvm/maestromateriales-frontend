@@ -86,7 +86,6 @@ export default function ProductoForm(props) {
   payload.current['Codigo'] = productoForm.Codigo.value
   if(Object.keys(payload.current).includes('updt_producto_codigo') && productoForm.Codigo.value != codeInitValue.current) {payload.current = {...payload.current,'codeChanged':true}}
   payload = payload.current
-  console.log('---------------------------------',payload)
   fetch(`http://${window.location.hostname}:8001/producto/`,{
     'method':'POST',
     'headers':{'Content-Type':'application/json'},

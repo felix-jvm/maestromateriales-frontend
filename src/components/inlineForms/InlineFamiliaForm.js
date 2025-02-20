@@ -37,7 +37,7 @@ export default function InlineFamiliaForm(props) {
          let selectElement = document.getElementsByClassName(selectClass)[0] 
          let newOption = document.createElement('option')
          newOption.value = re['ID']
-         newOption.innerText = re['Descripcion']
+         newOption.innerText = `${re['Codigo']} - ${re['Descripcion']}`
          newOption.selected = true
          selectElement.appendChild(newOption)
         } })}
