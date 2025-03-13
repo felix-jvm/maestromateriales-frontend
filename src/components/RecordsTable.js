@@ -29,7 +29,7 @@ export default function RecordsTable(props) {
  }})
 
  function reqSeqData(route,element) {
-  fetch(`http://${window.location.hostname}:8001/${route}/`,{method:'POST', 'headers':{'Content-Type':'application/json'}, body:JSON.stringify({mode:'reqTableSeqRecords'})})
+  fetch(`http://${window.location.hostname}:9001/${route}/`,{method:'POST', 'headers':{'Content-Type':'application/json'}, body:JSON.stringify({mode:'reqTableSeqRecords'})})
   .then(e=>e.json())
   .then(e=>{
     element.innerHTML = ''
@@ -45,7 +45,7 @@ export default function RecordsTable(props) {
   let claseRecordsTableSelect = document.getElementsByClassName('ClaseRecordsTableSelect')[0] 
   if (e.target.value) {
     targetValue.current = e.target.value
-    fetch(`http://${window.location.hostname}:8001/${route}/`,{
+    fetch(`http://${window.location.hostname}:9001/${route}/`,{
      method:'POST',
      headers:{'Content-Type':'application/json'},
      body:JSON.stringify({'mode':'reqCodeAllSeqData',payload:targetValue.current})
@@ -65,7 +65,7 @@ export default function RecordsTable(props) {
     table.id = 'table'
     divTable.appendChild(table)
   
-    fetch(`http://${window.location.hostname}:8001${props.sectionFormRoute}/`)
+    fetch(`http://${window.location.hostname}:9001${props.sectionFormRoute}/`)
     .then(re=>re.json())
     .then(re=>{
       var table = new DataTable('#table', {
@@ -117,7 +117,7 @@ export default function RecordsTable(props) {
  function handleSearchRecord(recordCode) {if(props.sectionFormRoute == '/producto') {props.setProductoForm(`updt_${recordCode}`)}else{setEditForm(`updt_${lastSelectedRecord.current}`)}}
  
  function handleRemoveRecord(route,identifier) {
-  fetch(`http://${window.location.hostname}:8001${route}/`,{
+  fetch(`http://${window.location.hostname}:9001${route}/`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({'mode':'delete','code':identifier})
@@ -127,7 +127,7 @@ export default function RecordsTable(props) {
 
   function fillSeqSelects(route,toFilter,element) {
     let value = toFilter
-    fetch(`http://${window.location.hostname}:8001/${route}/`,{
+    fetch(`http://${window.location.hostname}:9001/${route}/`,{
      method:'POST',
      headers:{'Content-Type':'application/json'},
      body:JSON.stringify({mode:'listFilteredRecords',payload:value})
@@ -156,7 +156,7 @@ export default function RecordsTable(props) {
   } 
 
   function generateProductRecords() {
-    fetch(`http://${window.location.hostname}:8001/producto/`,{
+    fetch(`http://${window.location.hostname}:9001/producto/`,{
      method:'POST',
      headers:{'Content-Type':'application/json'},
      'body':JSON.stringify({mode:'generateProductRecords'})})

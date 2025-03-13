@@ -3,7 +3,7 @@ import './inlineForms.css';
 export default function InlineClaseForm(props) {
 
     setTimeout(()=>{
-     fetch(`http://${window.location.hostname}:8001/familia/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
+     fetch(`http://${window.location.hostname}:9001/familia/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
       .then(e=>e.json())
       .then(e=>{
           let inlineFamiliaSelect = document.getElementsByClassName('inlineFamiliaSelect')[0]
@@ -29,7 +29,7 @@ export default function InlineClaseForm(props) {
      let route = props.inlineForm.split(',')[0]
      if(inlineCodigo && inlineFamiliaSelect && inlineDescripcion && route) {
       let payload = {'codigo':inlineCodigo,'familia':inlineFamiliaSelect,'descripcion':inlineDescripcion}
-      fetch(`http://${window.location.hostname}:8001/${route}/`,{
+      fetch(`http://${window.location.hostname}:9001/${route}/`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({'mode':'create','payload':payload})
@@ -46,7 +46,7 @@ export default function InlineClaseForm(props) {
         
         setTimeout(()=>{
             payload = {'payload':selectElement.value,'mode':'reqSeqCode'}
-            fetch(`http://${window.location.hostname}:8001/producto/`,{
+            fetch(`http://${window.location.hostname}:9001/producto/`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(payload)

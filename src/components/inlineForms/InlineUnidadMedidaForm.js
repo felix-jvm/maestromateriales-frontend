@@ -11,7 +11,7 @@ export default function InlineUnidadMedidaForm(props) {
      let inlineDescripcion = document.getElementsByClassName('inlineForm')[0].inlineDescripcion.value
      let route = props.inlineForm.split(',')[0]
      if(inlineDescripcion && route) {
-      fetch(`http://${window.location.hostname}:8001/${route}/`,{
+      fetch(`http://${window.location.hostname}:9001/${route}/`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({'mode':'create','payload':inlineDescripcion})

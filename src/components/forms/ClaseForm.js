@@ -5,7 +5,7 @@ export default function SegmentoForm (props) {
   var forMode = typeof(props.editForm) == 'string' && props.editForm.includes('updt')? 'update':'create';
   useEffect(()=>{
     setTimeout(()=>{
-     fetch(`http://${window.location.hostname}:8001/familia/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
+     fetch(`http://${window.location.hostname}:9001/familia/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
       .then(e=>e.json())
       .then(e=>{
         let claseFamilia = document.getElementsByClassName('claseFamilia')[0]
@@ -17,7 +17,7 @@ export default function SegmentoForm (props) {
         if(forMode=='create'){claseFamilia.value = ''}        
      }})                       
      if(forMode == 'update') {        
-      fetch(`http://${window.location.hostname}:8001/clase/`,{
+      fetch(`http://${window.location.hostname}:9001/clase/`,{
        method:'POST',
        headers:{'Content-Type':'application/json'},
        body:JSON.stringify({mode:'fillForm',code:props.editForm})
@@ -39,7 +39,7 @@ export default function SegmentoForm (props) {
   let descripcion = document.getElementsByClassName('editForm')[0].descripcion.value.trim()
   if(descripcion.length && familia.length && codigo.length) { 
    var recordCode = forMode == 'update'? props.editForm:''    
-   fetch(`http://${window.location.hostname}:8001/clase/`,{
+   fetch(`http://${window.location.hostname}:9001/clase/`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({mode:forMode,payload:{codigo,descripcion,familia},recordCode})

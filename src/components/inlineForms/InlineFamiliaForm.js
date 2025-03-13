@@ -3,7 +3,7 @@ import './inlineForms.css';
 export default function InlineFamiliaForm(props) {
 
     setTimeout(()=>{
-     fetch(`http://${window.location.hostname}:8001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
+     fetch(`http://${window.location.hostname}:9001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
       .then(e=>e.json())
       .then(e=>{
           let inlineSegmentoSelect = document.getElementsByClassName('inlineSegmentoSelect')[0]
@@ -25,7 +25,7 @@ export default function InlineFamiliaForm(props) {
      let route = props.inlineForm.split(',')[0]
      if(inlineCodigo && inlineSegmentoSelect && inlineDescripcion && route) {
       let payload = {'codigo':inlineCodigo,'segmento':inlineSegmentoSelect,'descripcion':inlineDescripcion}
-      fetch(`http://${window.location.hostname}:8001/${route}/`,{
+      fetch(`http://${window.location.hostname}:9001/${route}/`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({'mode':'create','payload':payload})

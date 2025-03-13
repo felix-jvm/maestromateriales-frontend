@@ -7,7 +7,7 @@ export default function CategoriaForm (props) {
  useEffect(()=>{
   if(forMode == 'update') {
    setTimeout(()=>{
-    fetch(`http://${window.location.hostname}:8001/categoria/`,{
+    fetch(`http://${window.location.hostname}:9001/categoria/`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({mode:'fillForm',code:props.editForm})
@@ -23,7 +23,7 @@ export default function CategoriaForm (props) {
   let descripcion = document.getElementsByClassName('editForm')[0].descripcion.value.replace(' ','').trim()
   if(descripcion.length) { 
    var recordCode = forMode == 'update'? props.editForm:''
-   fetch(`http://${window.location.hostname}:8001/categoria/`,{
+   fetch(`http://${window.location.hostname}:9001/categoria/`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({mode:forMode,payload:descripcion,recordCode})

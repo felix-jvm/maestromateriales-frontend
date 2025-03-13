@@ -7,7 +7,7 @@ export default function SegmentoForm (props) {
   useEffect(()=>{
    if(forMode == 'update') {
     setTimeout(()=>{
-     fetch(`http://${window.location.hostname}:8001/segmento/`,{
+     fetch(`http://${window.location.hostname}:9001/segmento/`,{
        method:'POST',
        headers:{'Content-Type':'application/json'},
        body:JSON.stringify({mode:'fillForm',code:props.editForm})
@@ -26,7 +26,7 @@ export default function SegmentoForm (props) {
   let descripcion = document.getElementsByClassName('editForm')[0].descripcion.value.trim()
   if(descripcion.length && codigo.length) { 
    var recordCode = forMode == 'update'? props.editForm:''    
-   fetch(`http://${window.location.hostname}:8001/segmento/`,{
+   fetch(`http://${window.location.hostname}:9001/segmento/`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({mode:forMode,payload:{codigo,descripcion},recordCode})

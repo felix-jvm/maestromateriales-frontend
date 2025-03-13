@@ -26,7 +26,7 @@ export default function ProductoForm(props) {
  useEffect(()=>{
   var re = false
   setTimeout(()=>{
-   fetch(`http://${window.location.hostname}:8001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
+   fetch(`http://${window.location.hostname}:9001/segmento/`,{method:'POST','headers':{'Content-Type':'application/json'},body:JSON.stringify({mode:'reqTableSeqRecords'})})
     .then(e=>e.json())
     .then(e=>{
       let segmentoSelect = document.getElementsByClassName('Segmento')[0]
@@ -44,7 +44,7 @@ export default function ProductoForm(props) {
         } }         
       }!payload.current['updt_producto_codigo']? segmentoSelect.value = '':void 0})
 
-   fetch(`http://${window.location.hostname}:8001/producto/`,{
+   fetch(`http://${window.location.hostname}:9001/producto/`,{
      'method':'POST',
      'headers':{'Content-Type':'application/json'},
      body:JSON.stringify({'mode':'fillForm','productCode':props.productoForm})
@@ -72,7 +72,7 @@ export default function ProductoForm(props) {
          if(element){element.value = re.specificRecord[0][elementName]} }
        
         if(re.specificRecord[0].FichaTecnica == 'True') {
-         fetch(`http://${window.location.hostname}:8001/producto/`,{
+         fetch(`http://${window.location.hostname}:9001/producto/`,{
            'method':'POST',
            'headers':{'Content-Type':'application/json'},
            body:JSON.stringify({'mode':'request_ficha_tecnica','productCode':props.productoForm})
@@ -86,7 +86,7 @@ export default function ProductoForm(props) {
   payload.current['Codigo'] = productoForm.Codigo.value
   if(Object.keys(payload.current).includes('updt_producto_codigo') && productoForm.Codigo.value != codeInitValue.current) {payload.current = {...payload.current,'codeChanged':true}}
   payload = payload.current
-  fetch(`http://${window.location.hostname}:8001/producto/`,{
+  fetch(`http://${window.location.hostname}:9001/producto/`,{
     'method':'POST',
     'headers':{'Content-Type':'application/json'},
     body:JSON.stringify({'mode':'create',payload})
@@ -100,7 +100,7 @@ export default function ProductoForm(props) {
     formData.append('mode','save_ficha_tecnica')
     formData.append('productCode',productCode)
     formData.append('file',archive)  
-    fetch(`http://${window.location.hostname}:8001/producto/`,{
+    fetch(`http://${window.location.hostname}:9001/producto/`,{
        method:'POST',
        body:formData
     })}
@@ -128,7 +128,7 @@ export default function ProductoForm(props) {
  function fillSeqSelects(route,toFilter,element,completedSeq=false,autoFillSelect=false) {
   let value = toFilter
   let mode = !completedSeq? 'listFilteredRecords':'reqSeqCode'
-  fetch(`http://${window.location.hostname}:8001/${route}/`,{
+  fetch(`http://${window.location.hostname}:9001/${route}/`,{
    method:'POST',
    headers:{'Content-Type':'application/json'},
    body:JSON.stringify({mode,payload:value})
