@@ -135,7 +135,7 @@ export default function ProductoForm(props) {
   })
   .then(e=>e.json())
   .then(e=>{
-   if(!completedSeq) {   
+   if(!completedSeq) {  
     element.innerHTML = ''
     if(e.length) {
      for(let optionRecord of e) {
@@ -144,7 +144,7 @@ export default function ProductoForm(props) {
       option.innerText = `${optionRecord['Codigo']} - ${optionRecord['Descripcion']}`
       element.appendChild(option)
 
-      if(payload.current['updt_producto_codigo'] && autoFillSelect){
+      if(payload.current['updt_producto_codigo'] && autoFillSelect) {
         let recordCode = ''
         if(route=='familia'){recordCode=payload.current['updt_producto_codigo'].split('_')[0].slice(0,4)}
         else if(route=='clase'){recordCode=payload.current['updt_producto_codigo'].split('_')[0].slice(0,6)}
@@ -156,8 +156,8 @@ export default function ProductoForm(props) {
     }};!payload.current['updt_producto_codigo']? element.value = '':void 0
    } else {
     let Codigo = document.getElementsByClassName('Codigo')[0]
-    if(payload.current['updt_producto_codigo']){Codigo.value = payload.current['updt_producto_codigo']}
-    else if(e['seq']) {Codigo.value = e['seq']}
+    if(payload.current['updt_producto_codigo'] && !e['seq']){Codigo.value = payload.current['updt_producto_codigo']}
+    else if(e['seq'] && toFilter) {Codigo.value = e['seq']}
    } })}
 
  function handleSequenceInt(e,autoFillSelect=false) {
